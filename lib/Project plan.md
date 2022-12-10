@@ -10,4 +10,4 @@ Board :-
 
   To do:-
 
-  Build a column letter to no converter ie:  h1 ==> 8, 1
+  Build a column letter to number converter ie:  h1 ==> 8, 1

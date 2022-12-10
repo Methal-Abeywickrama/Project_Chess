@@ -1,51 +1,68 @@
 # frozen_string_literal: true
 
 class Chess_Piece
+  attr_accessor :chara, :possible_moves, :colour
+
   def initialize(colour)
-    @type
     @colour = colour
+ #   @possible_moves = calculate_moves()
+    @chara = ' '
   end
+
+  def 
 end
 
 class Rook < Chess_Piece
   def initialize
     super
-    @type = 'Rook'
+    @type = 'rook'
+    @chara = @colour.eql?('black') ? '\u265C' : '\u2656'
   end
-
 end
 
 class Knight < Chess_Piece
   def initialize
     super
-    @type = 'Knight'
+    @type = 'knight'
+    @chara = @colour.eql?('black') ? '\u265E' : '\u2658'
   end
 end
 
 class Bishop < Chess_Piece
   def initialize
     super
-    @type = 'Bishop'
+    @type = 'bishop'
+    @chara = @colour.eql?('black') ? '\u265D' : '\u2657'
   end
 end
 
 class Queen < Chess_Piece
   def initialize
     super
-    @type = 'Queen'
+    @type = 'queen'
+    @chara = @colour.eql?('black') ? '\u265B' : '\u2655'
   end
 end
 
 class King < Chess_Piece
   def initialize
     super
-    @type = 'King'
+    @type = 'king'
+    @chara = @colour.eql?('black') ? '\u265A' : '\u2654'
   end
 end
 
 class Pawn < Chess_Piece
   def initialize
     super
-    @type = 'Pawn'
+    @type = 'pawn'
+    @chara = @colour.eql?('black') ? '\u265F' : '\u2659'
+  end
+end
+
+class Blank
+  def intitialize
+    @type = 'blank'
+    @chara = ' '
   end
 end
