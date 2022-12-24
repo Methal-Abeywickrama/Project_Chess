@@ -1,68 +1,71 @@
 # frozen_string_literal: true
 
-class Chess_Piece
-  attr_accessor :chara, :possible_moves, :colour
+class Rook
+  attr_accessor :chara, :colour
 
   def initialize(colour)
     @colour = colour
- #   @possible_moves = calculate_moves()
-    @chara = ' '
-  end
-
-  def 
-end
-
-class Rook < Chess_Piece
-  def initialize
-    super
-    @type = 'rook'
-    @chara = @colour.eql?('black') ? '\u265C' : '\u2656'
+    @chara = @colour.eql?("black") ? "\u{265C}" : "\u{2656}"
   end
 end
 
-class Knight < Chess_Piece
-  def initialize
-    super
-    @type = 'knight'
-    @chara = @colour.eql?('black') ? '\u265E' : '\u2658'
+class Knight 
+  attr_accessor :chara, :colour
+
+  def initialize(colour)
+    @colour = colour
+    @chara = @colour.eql?("black") ? "\u{265E}" : "\u{2658}"
   end
 end
 
-class Bishop < Chess_Piece
-  def initialize
-    super
-    @type = 'bishop'
-    @chara = @colour.eql?('black') ? '\u265D' : '\u2657'
+class Bishop 
+  attr_accessor :chara, :colour
+
+  def initialize(colour)
+    @colour = colour
+    @chara = @colour.eql?("black") ? "\u{265D}" : "\u{2657}"
   end
 end
 
-class Queen < Chess_Piece
-  def initialize
-    super
-    @type = 'queen'
-    @chara = @colour.eql?('black') ? '\u265B' : '\u2655'
+class Queen 
+  attr_accessor :chara, :colour
+
+  def initialize(colour)
+    @colour = colour
+    @chara = @colour.eql?("black") ? "\u{265B}" : "\u{2655}"
   end
 end
 
-class King < Chess_Piece
-  def initialize
-    super
-    @type = 'king'
-    @chara = @colour.eql?('black') ? '\u265A' : '\u2654'
+class King 
+  attr_accessor :chara, :colour
+
+  def initialize(colour)
+    @colour = colour
+    @chara = @colour.eql?("black") ? "\u{265A}" : "\u{2654}"
   end
 end
 
-class Pawn < Chess_Piece
-  def initialize
-    super
-    @type = 'pawn'
-    @chara = @colour.eql?('black') ? '\u265F' : '\u2659'
+class Pawn
+  attr_accessor :chara, :colour
+
+  def initialize(colour)
+    @colour = colour
+    @chara = @colour.eql?("black") ? "\u{265F}" : "\u{2659}"
   end
 end
+
+# class Blank
+#   attr_accessor :chara
+
+#   def intitialize(hea)
+#     @chara = hea
+#   end
+# end
 
 class Blank
-  def intitialize
-    @type = 'blank'
-    @chara = ' '
+  attr_accessor :chara
+  
+  def initialize
+    @chara = " "
   end
 end

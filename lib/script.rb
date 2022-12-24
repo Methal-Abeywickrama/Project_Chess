@@ -16,6 +16,7 @@ class Board
     @rows[3] = set_empty_column(3)
     @rows[4] = set_empty_column(4)
     @rows[5] = set_empty_column(5)
+    p @rows[5]
     @rows[6] = set_empty_column(6)
     @rows[7] = set_pawn_column('black', 7)
     @rows[8] = set_column('black', 8)
@@ -55,18 +56,23 @@ class Board
   end
 
   def ppt(square)
-    square.chara if square.is_a?(String)
+    return square.chara unless square.is_a?(String) || square.is_a?(Integer)
+
+    square
   end
 
   def print_board
     @rows.each_with_index do |x, n|
-        puts '---------------------------------'
-        puts "| #{ppt(x[0])} | #{ppt(x[1])} | #{ppt(x[2])} | #{ppt(x[3])} | #{ppt(x[4])} | #{ppt(x[5])} | #{ppt(x[6])} | #{ppt(x[7])} | #{ppt(x[8])} |"
+      puts '-------------------------------------'
+      puts "| #{ppt(x[0])} | #{ppt(x[1])} | #{ppt(x[2])} | #{ppt(x[3])} | #{ppt(x[4])} | #{ppt(x[5])} | #{ppt(x[6])} | #{ppt(x[7])} | #{ppt(x[8])} |"
     end
-    puts '---------------------------------'
+    puts '-------------------------------------'
   end
 end
 
-game = Board.new
+ game = Board.new
 
+
+ bgs = Blank.new
+ p bgs.chara
 
