@@ -7,6 +7,14 @@ class Board
     @rows= Array.new(10)
     set_the_board
     print_board
+    @white_pieces = {
+      'knight' =
+      'rook' = 
+      'bishop' =
+      'king' =
+      'queen' =
+      'pawn'  =
+    }
   end
 
   def set_the_board
@@ -68,11 +76,19 @@ class Board
     end
     puts '-------------------------------------'
   end
+
+  def format_input(input)
+   if input == 'O-O' or '0-0'
+      # then kingside castle
+   elsif input == 'O-O-O' or '0-0-0'
+      #then queenside castle
+   elsif input.length = 4 && input.split(//)[1] == 'x'
+      #then capture
+   elsif input
+   end
+
+  end
 end
 
  game = Board.new
-
-
- bgs = Blank.new
- p bgs.chara
 

@@ -54,14 +54,6 @@ class Pawn
   end
 end
 
-# class Blank
-#   attr_accessor :chara
-
-#   def intitialize(hea)
-#     @chara = hea
-#   end
-# end
-
 class Blank
   attr_accessor :chara
   
