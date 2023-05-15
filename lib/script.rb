@@ -6,6 +6,7 @@ class Board
 
   def initialize
     # Initializes the rows of the board
+    @board = {}
     @rows= Array.new(10)
     set_the_board
     print_board
@@ -22,20 +23,27 @@ class Board
   # Sets up the initial configuration of the chess board
   def set_the_board
     # Sets labels for the columns
-    @rows[0] = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j']
+    # @rows[0] = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j']
+    @board[:labels] = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j']
     # Sets the white pieces column
-    @rows[1] = set_column('white', 1)
+    # @rows[1] = set_column('white', 1)
+    @board[:white_pieces] = set_column('white', 1)
     # Sets the white pawns column
-    @rows[2] = set_pawn_column('white', 2)
+    # @rows[2] = set_pawn_column('white', 2)
+    @board[:white_pawns] = set_pawn_column('white', 2)
     # Set the empty columns
-    @rows[3] = set_empty_column(3)
-    @rows[4] = set_empty_column(4)
-    @rows[5] = set_empty_column(5)
-    @rows[6] = set_empty_column(6)
+    @board[3] = set_empty_column(3)
+    @board[4] = set_empty_column(4)
+    @board[5] = set_empty_column(5)
+    @board[6] = set_empty_column(6)
+    # @rows[3] = set_empty_column(3)
+    # @rows[4] = set_empty_column(4)
+    # @rows[5] = set_empty_column(5)
+    # @rows[6] = set_empty_column(6)
     # Sets the black pawns column
-    @rows[7] = set_pawn_column('black', 7)
+    @board[:black_pawns] = set_pawn_column('black', 7)
     # Sets the black pieces column
-    @rows[8] = set_column('black', 8)
+    @board[:black_pieces] = set_column('black', 8)
     # Sets the labels for the columns
     @rows[9] = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j']
   end
@@ -84,12 +92,23 @@ class Board
 
   # Prints the current state of the chess board
   def print_board
-    @rows.each_with_index do |x, n|
-      puts '-------------------------------------'
-      puts "| #{ppt(x[0])} | #{ppt(x[1])} | #{ppt(x[2])} | #{ppt(x[3])} | #{ppt(x[4])} | #{ppt(x[5])} | #{ppt(x[6])} | #{ppt(x[7])} | #{ppt(x[8])} |"
+    @board.each_with_index do |(key, value), n|
+        puts '-------------------------------------'
+        if key == :labels
+          puts "| #{value.join(' | ')} |"
+        else 
+          puts "| #{ppt(value[0])} | #{ppt(value[1])} | #{ppt(value[2])} | #{ppt(value[3])} | #{ppt(value[4])} | #{ppt(value[5])} | #{ppt(value[6])} | #{ppt(value[7])} | #{ppt(value[8])} |"
+        end
     end
     puts '-------------------------------------'
   end
+  # def print_board
+  #   @rows.each_with_index do |x, n|
+  #     puts '-------------------------------------'
+  #     puts "| #{ppt(x[0])} | #{ppt(x[1])} | #{ppt(x[2])} | #{ppt(x[3])} | #{ppt(x[4])} | #{ppt(x[5])} | #{ppt(x[6])} | #{ppt(x[7])} | #{ppt(x[8])} |"
+  #   end
+  #   puts '-------------------------------------'
+  # end
 
   # Analyzes the user input and acts accordingly
   def analyze_input(input)
