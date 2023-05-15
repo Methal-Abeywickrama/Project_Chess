@@ -31,7 +31,6 @@ class Board
     @rows[3] = set_empty_column(3)
     @rows[4] = set_empty_column(4)
     @rows[5] = set_empty_column(5)
-    p @rows[5]
     @rows[6] = set_empty_column(6)
     # Sets the black pawns column
     @rows[7] = set_pawn_column('black', 7)
@@ -92,14 +91,20 @@ class Board
     puts '-------------------------------------'
   end
 
-  def format_input(input)
+  # Analyzes the user input and acts accordingly
+  def analyze_input(input)
    if input == 'O-O' or '0-0'
       # then kingside castle
    elsif input == 'O-O-O' or '0-0-0'
-      #then queenside castle
-   elsif input.length = 4 && input.split(//)[1] == 'x'
-      #then capture
-   elsif input
+      # then queenside castle
+   elsif input.length == 4 && input.split(//)[1] == 'x'
+      # then capture
+   elsif input.length == 2 && input.split(//)[0].ord.between?(97, 122) && input.split(//)[1].ord.between?(49, 56)
+      # then its a pawn movement
+   elsif input.length == 3 && input.split(//)[1].ord.between?(97, 122) && input.split(//)[2].ord.between?(49, 56)
+      # then its the movement of a different piece
+   else
+      # Its and invalid input
    end
 
   end
