@@ -1,36 +1,47 @@
 # frozen_string_literal: true
 require_relative 'chess_pieces.rb'
 
+# Represents a chess game board
 class Board 
 
   def initialize
+    # Initializes the rows of the board
     @rows= Array.new(10)
     set_the_board
     print_board
-    @white_pieces = {
-      'knight' =
-      'rook' = 
-      'bishop' =
-      'king' =
-      'queen' =
-      'pawn'  =
-    }
+    # @white_pieces = {
+    #   'knight' =
+    #   'rook' = 
+    #   'bishop' =
+    #   'king' =
+    #   'queen' =
+    #   'pawn'  =
+    # }
   end
 
+  # Sets up the initial configuration of the chess board
   def set_the_board
+    # Sets labels for the columns
     @rows[0] = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j']
+    # Sets the white pieces column
     @rows[1] = set_column('white', 1)
+    # Sets the white pawns column
     @rows[2] = set_pawn_column('white', 2)
+    # Set the empty columns
     @rows[3] = set_empty_column(3)
     @rows[4] = set_empty_column(4)
     @rows[5] = set_empty_column(5)
     p @rows[5]
     @rows[6] = set_empty_column(6)
+    # Sets the black pawns column
     @rows[7] = set_pawn_column('black', 7)
+    # Sets the black pieces column
     @rows[8] = set_column('black', 8)
+    # Sets the labels for the columns
     @rows[9] = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j']
   end
 
+  # Sets up a column with pieces of a given colour
   def set_column(colour, letter)
     column = []
     column[0] = letter
@@ -45,6 +56,7 @@ class Board
     column
   end
 
+  # Sets up a column with pawns of a given colour
   def set_pawn_column(colour, letter)
     column = []
     column[0] = letter
@@ -54,6 +66,7 @@ class Board
     column
   end
 
+  # Sets up an empty column
   def set_empty_column(letter)
     column = []
     column[0] = letter
@@ -63,12 +76,14 @@ class Board
     column
   end
 
+  # Returns a printable representation of a square
   def ppt(square)
     return square.chara unless square.is_a?(String) || square.is_a?(Integer)
 
     square
   end
 
+  # Prints the current state of the chess board
   def print_board
     @rows.each_with_index do |x, n|
       puts '-------------------------------------'
