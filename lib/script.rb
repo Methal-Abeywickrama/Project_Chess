@@ -23,23 +23,16 @@ class Board
   # Sets up the initial configuration of the chess board
   def set_the_board
     # Sets labels for the columns
-    # @rows[0] = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j']
     @board[:labels] = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j']
     # Sets the white pieces column
-    # @rows[1] = set_column('white', 1)
     @board[:white_pieces] = set_column('white', 1)
     # Sets the white pawns column
-    # @rows[2] = set_pawn_column('white', 2)
     @board[:white_pawns] = set_pawn_column('white', 2)
     # Set the empty columns
     @board[3] = set_empty_column(3)
     @board[4] = set_empty_column(4)
     @board[5] = set_empty_column(5)
     @board[6] = set_empty_column(6)
-    # @rows[3] = set_empty_column(3)
-    # @rows[4] = set_empty_column(4)
-    # @rows[5] = set_empty_column(5)
-    # @rows[6] = set_empty_column(6)
     # Sets the black pawns column
     @board[:black_pawns] = set_pawn_column('black', 7)
     # Sets the black pieces column
@@ -102,13 +95,6 @@ class Board
     end
     puts '-------------------------------------'
   end
-  # def print_board
-  #   @rows.each_with_index do |x, n|
-  #     puts '-------------------------------------'
-  #     puts "| #{ppt(x[0])} | #{ppt(x[1])} | #{ppt(x[2])} | #{ppt(x[3])} | #{ppt(x[4])} | #{ppt(x[5])} | #{ppt(x[6])} | #{ppt(x[7])} | #{ppt(x[8])} |"
-  #   end
-  #   puts '-------------------------------------'
-  # end
 
   # Analyzes the user input and acts accordingly
   def analyze_input(input)
