@@ -25,18 +25,18 @@ class Board
     # Sets labels for the columns
     @board[:labels] = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j']
     # Sets the white pieces column
-    @board[:white_pieces] = set_column('white', 1)
+    @board[1] = set_column('white', 1)
     # Sets the white pawns column
-    @board[:white_pawns] = set_pawn_column('white', 2)
+    @board[2] = set_pawn_column('white', 2)
     # Set the empty columns
     @board[3] = set_empty_column(3)
     @board[4] = set_empty_column(4)
     @board[5] = set_empty_column(5)
     @board[6] = set_empty_column(6)
     # Sets the black pawns column
-    @board[:black_pawns] = set_pawn_column('black', 7)
+    @board[7] = set_pawn_column('black', 7)
     # Sets the black pieces column
-    @board[:black_pieces] = set_column('black', 8)
+    @board[8] = set_column('black', 8)
     # Sets the labels for the columns
     @rows[9] = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j']
   end
@@ -113,7 +113,21 @@ class Board
    end
 
   end
+  
+  # Analyzes the validity of format of a user input
+  def squarewise_input_valid?(input)
+    move = input.chars
+    p move
+    if move.length == 2 && move[0].ord.between?(97, 104) && move[1].ord.between?(49 , 56)
+      true
+    else
+      false
+    end
+  end
+  
 end
 
- game = Board.new
+game = Board.new
+
+
 
