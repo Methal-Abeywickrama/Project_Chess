@@ -1,11 +1,27 @@
 # frozen_string_literal: true
 
+# This class contains the common behaviours that shall be implemented in the successive classes
+class ChessPiece 
+
+  @@
+  def initialize
+
+  end
+end
+
 class Rook
   attr_accessor :chara, :colour
 
   def initialize(colour)
     @colour = colour
+    @square()
     @chara = @colour.eql?("black") ? "\u{265C}" : "\u{2656}"
+    @moves_available = []
+  end
+
+  #Calculates the possible moves that each piece can make without restrictions
+  def calculate_moves
+
   end
 end
 

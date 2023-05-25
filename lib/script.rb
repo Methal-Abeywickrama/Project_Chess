@@ -1,128 +1,54 @@
 # frozen_string_literal: true
+
 require_relative 'chess_pieces.rb'
+require_relative 'board_setup.rb'
 
 # Represents a chess game board
-class Board 
+class Board
+  attr_accessor :board, :rows
+
+  include BoardSetup
 
   def initialize
     # Initializes the rows of the board
     @board = {}
-    @rows= Array.new(10)
     set_the_board
     print_board
-    # @white_pieces = {
-    #   'knight' =
-    #   'rook' = 
-    #   'bishop' =
-    #   'king' =
-    #   'queen' =
-    #   'pawn'  =
-    # }
   end
 
-  # Sets up the initial configuration of the chess board
-  def set_the_board
-    # Sets labels for the columns
-    @board[:labels] = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j']
-    # Sets the white pieces column
-    @board[1] = set_column('white', 1)
-    # Sets the white pawns column
-    @board[2] = set_pawn_column('white', 2)
-    # Set the empty columns
-    @board[3] = set_empty_column(3)
-    @board[4] = set_empty_column(4)
-    @board[5] = set_empty_column(5)
-    @board[6] = set_empty_column(6)
-    # Sets the black pawns column
-    @board[7] = set_pawn_column('black', 7)
-    # Sets the black pieces column
-    @board[8] = set_column('black', 8)
-    # Sets the labels for the columns
-    @rows[9] = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j']
-  end
-
-  # Sets up a column with pieces of a given colour
-  def set_column(colour, letter)
-    column = []
-    column[0] = letter
-    column[1] = Rook.new(colour)
-    column[2] = Knight.new(colour)
-    column[3] = Bishop.new(colour)
-    column[4] = Queen.new(colour)
-    column[5] = King.new(colour)
-    column[6] = Bishop.new(colour)
-    column[7] = Knight.new(colour)
-    column[8] = Rook.new(colour)
-    column
-  end
-
-  # Sets up a column with pawns of a given colour
-  def set_pawn_column(colour, letter)
-    column = []
-    column[0] = letter
-    for i in 1..8 do
-      column[i] = Pawn.new(colour)
-    end
-    column
-  end
-
-  # Sets up an empty column
-  def set_empty_column(letter)
-    column = []
-    column[0] = letter
-    for i in 1..8 do
-      column[i] = Blank.new
-    end
-    column
-  end
-
-  # Returns a printable representation of a square
-  def ppt(square)
-    return square.chara unless square.is_a?(String) || square.is_a?(Integer)
-
-    square
-  end
-
-  # Prints the current state of the chess board
-  def print_board
-    @board.each_with_index do |(key, value), n|
-        puts '-------------------------------------'
-        if key == :labels
-          puts "| #{value.join(' | ')} |"
-        else 
-          puts "| #{ppt(value[0])} | #{ppt(value[1])} | #{ppt(value[2])} | #{ppt(value[3])} | #{ppt(value[4])} | #{ppt(value[5])} | #{ppt(value[6])} | #{ppt(value[7])} | #{ppt(value[8])} |"
-        end
-    end
-    puts '-------------------------------------'
-  end
-
-  # Analyzes the user input and acts accordingly
-  def analyze_input(input)
-   if input == 'O-O' or '0-0'
-      # then kingside castle
-   elsif input == 'O-O-O' or '0-0-0'
-      # then queenside castle
-   elsif input.length == 4 && input.split(//)[1] == 'x'
-      # then capture
-   elsif input.length == 2 && input.split(//)[0].ord.between?(97, 122) && input.split(//)[1].ord.between?(49, 56)
-      # then its a pawn movement
-   elsif input.length == 3 && input.split(//)[1].ord.between?(97, 122) && input.split(//)[2].ord.between?(49, 56)
-      # then its the movement of a different piece
-   else
-      # Its and invalid input
-   end
-
-  end
-  
   # Analyzes the validity of format of a user input
-  def squarewise_input_valid?(input)
-    move = input.chars
-    p move
+  def squarewise_input_valid?(move)
     if move.length == 2 && move[0].ord.between?(97, 104) && move[1].ord.between?(49 , 56)
       true
     else
       false
     end
+  end
+
+  # Analyzes whether a certain move is possible on the board
+  def find_move_feasibility(move)
+    # Case:01  start square, end square both the same color
+    # Case:02  start square doesnt contain a piece
+    # Case:03  start square doesnt contain a piece of the correct color
+    # Case:04  out of the range of possible movements of the piece
+    # Case:05  obstruction in the way
+    # Case:06  the king comes into check
+  end
+
+  # Gets the input of the user for a move
+  def get_user_input(color, start_square = 'initial', final_square = 'initial')
+    until squarewise_input_valid?(start_square)
+      puts "Enter the square of the piece to be moved"
+      start_square = gets.chomp!.chars
+    end
+    # ///////  check the validity
+    until squarewise_input_valid?(final_square)
+      puts "Enter the square to be moved into"
+      final_square = get.chomp!.chars
+    end
+    # ///////  check the validity
+
+    [start_square, final_square, color]
   end
   
 end
@@ -130,4 +56,5 @@ end
 game = Board.new
 
 
+game.board.print 
 
