@@ -10,3 +10,11 @@ To be defined:=
   end
 
   >> define the superclass for the chess pieces
+      ---Ongoing---
+
+  
+
+  >> Fix the formatting of the get moves from user method
+
+
+

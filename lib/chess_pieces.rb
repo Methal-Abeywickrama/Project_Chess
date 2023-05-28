@@ -1,76 +1,116 @@
 # frozen_string_literal: true
 
 # This class contains the common behaviours that shall be implemented in the successive classes
-class ChessPiece 
-
-  @@
-  def initialize
-
-  end
-end
-
-class Rook
-  attr_accessor :chara, :colour
+class ChessPiece
+  attr_accessor :colour
 
   def initialize(colour)
     @colour = colour
-    @square()
+  end
+
+  # Returns the initial position taking input as the colour
+  def initial_square(start_pos)
+    if @colour == 'white'
+      start_pos[0]
+    else
+      start_pos[1]
+    end
+  end
+end
+
+class Rook < ChessPiece
+  attr_accessor :square, :colour, :chara
+
+  @@count = {'white' => 0, 'black' => 0}
+  @@initial_squares = { 'white' => [[[1], [1]], [[8], [1]]], 'black' => [[[1], [8]], [[8], [8]]] }
+
+  def initialize(colour)
+    super(colour)
+    @@count[colour] += 1
+    @square = @@initial_squares[colour][@@count[colour] - 1]
     @chara = @colour.eql?("black") ? "\u{265C}" : "\u{2656}"
     @moves_available = []
   end
 
-  #Calculates the possible moves that each piece can make without restrictions
+  # Calculates the possible moves that each piece can make without restrictions
   def calculate_moves
 
   end
+
 end
 
-class Knight 
-  attr_accessor :chara, :colour
+class Knight < ChessPiece
+  attr_accessor :chara, :colour, :square
+
+  @@count = {'white' => 0, 'black' => 0}
+  @@initial_squares = { 'white' => [[[2], [1]], [[7], [1]]], 'black' => [[[2], [8]], [[7], [8]]] }
 
   def initialize(colour)
-    @colour = colour
+    super(colour)
+    @@count[colour] += 1
+    @square = @@initial_squares[colour][@@count[colour] - 1]
     @chara = @colour.eql?("black") ? "\u{265E}" : "\u{2658}"
   end
 end
 
-class Bishop 
-  attr_accessor :chara, :colour
+class Bishop < ChessPiece
+  attr_accessor :chara, :colour, :square
+
+  @@count = {'white' => 0, 'black' => 0}
+  @@initial_squares = { 'white' => [[[3], [1]], [[6], [1]]], 'black' => [[[3], [8]], [[6], [8]]] }
 
   def initialize(colour)
-    @colour = colour
+    super(colour)
+    @@count[colour] += 1
+    @square = @@initial_squares[colour][@@count[colour] - 1]
     @chara = @colour.eql?("black") ? "\u{265D}" : "\u{2657}"
   end
 end
 
-class Queen 
-  attr_accessor :chara, :colour
+class Queen < ChessPiece
+  attr_accessor :chara, :colour, :square
+
+  @@count = {'white' => 0, 'black' => 0}
+  @@initial_squares = { 'white' => [[[4], [1]]], 'black' => [[[4], [8]]] }
 
   def initialize(colour)
-    @colour = colour
+    super(colour)
+    @@count[colour] += 1
+    @square = @@initial_squares[colour][@@count[colour] - 1]
     @chara = @colour.eql?("black") ? "\u{265B}" : "\u{2655}"
   end
 end
 
-class King 
-  attr_accessor :chara, :colour
+class King < ChessPiece
+  attr_accessor :chara, :colour, :square
+
+  @@count = {'white' => 0, 'black' => 0}
+  @@initial_squares = { 'white' => [[[5], [1]]], 'black' => [[[5], [8]]] }
 
   def initialize(colour)
-    @colour = colour
+    super(colour)
+    @@count[colour] += 1
+    @square = @@initial_squares[colour][@@count[colour] - 1]
     @chara = @colour.eql?("black") ? "\u{265A}" : "\u{2654}"
   end
 end
 
-class Pawn
-  attr_accessor :chara, :colour
+class Pawn < ChessPiece
+  attr_accessor :chara, :colour, :square
+
+  @@count = {'white' => 0, 'black' => 0}
+  @@initial_squares = { 'white' => [[[1], [2]], [[2], [2]], [[3], [2]], [[4], [2]], [[5], [2]], [[6], [2]], [[7], [2]], [[8], [2]]],
+                        'black' => [[[1], [7]], [[2], [7]], [[3], [7]], [[4], [7]], [[5], [7]], [[6], [7]], [[7], [7]], [[8], [7]]] }
 
   def initialize(colour)
-    @colour = colour
+    super(colour)
+    @@count[colour] += 1
+    @square = @@initial_squares[colour][@@count[colour] - 1]
     @chara = @colour.eql?("black") ? "\u{265F}" : "\u{2659}"
   end
 end
 
-class Blank
+class Blank 
   attr_accessor :chara
   
   def initialize

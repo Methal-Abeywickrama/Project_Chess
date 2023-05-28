@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'chess_pieces.rb'
-require_relative 'board_setup.rb'
+require_relative 'chess_pieces'
+require_relative 'board_setup'
 
 # Represents a chess game board
 class Board
@@ -14,6 +14,7 @@ class Board
     @board = {}
     set_the_board
     print_board
+    print_squares_board
   end
 
   # Analyzes the validity of format of a user input
