@@ -15,7 +15,15 @@ class Board
     set_the_board
     print_board
     print_squares_board
+    input = take_and_input
   end
+
+  def take_and_input
+    input = get_user_input('white')
+    print input
+    input
+  end
+
 
   # Analyzes the validity of format of a user input
   def squarewise_input_valid?(move)
@@ -39,17 +47,24 @@ class Board
   # Gets the input of the user for a move
   def get_user_input(color, start_square = 'initial', final_square = 'initial')
     until squarewise_input_valid?(start_square)
-      puts "Enter the square of the piece to be moved"
+      puts 'Enter the square of the piece to be moved'
       start_square = gets.chomp!.chars
     end
     # ///////  check the validity
-    until squarewise_input_valid?(final_square)
-      puts "Enter the square to be moved into"
-      final_square = get.chomp!.chars
+    until squarewise_input_valid?(final_square) && final_square != start_square
+      puts 'Enter the square to be moved into'
+      final_square = gets.chomp!.chars
     end
     # ///////  check the validity
 
-    [start_square, final_square, color]
+    [color, convert_input_to_standard(start_square), convert_input_to_standard(final_square)]
+  end
+
+  def convert_input_to_standard(square)
+    reference = {'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5, 'f' => 6, 'g' => 7, 'h' => 8}
+    square[0] = reference[square[0]]
+    square[1] = square[1].to_i
+    square
   end
   
 end
@@ -57,5 +72,5 @@ end
 game = Board.new
 
 
-game.board.print 
+# game.board.print 
 

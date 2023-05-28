@@ -1,5 +1,10 @@
 To be defined:=
 
+  >> define the superclass for the chess pieces
+      ---Ongoing---
+
+  >> Fix the formatting of the get moves from user method
+
 >> def find_move_feasibility(move)
     # Case:01  start square, end square both the same color
     # Case:02  start square doesnt contain a piece
@@ -9,12 +14,6 @@ To be defined:=
     # Case:06  the king comes into check
   end
 
-  >> define the superclass for the chess pieces
-      ---Ongoing---
-
-  
-
-  >> Fix the formatting of the get moves from user method
 
 
 

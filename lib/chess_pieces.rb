@@ -22,7 +22,7 @@ class Rook < ChessPiece
   attr_accessor :square, :colour, :chara
 
   @@count = {'white' => 0, 'black' => 0}
-  @@initial_squares = { 'white' => [[[1], [1]], [[8], [1]]], 'black' => [[[1], [8]], [[8], [8]]] }
+  @@initial_squares = { 'white' => [[1, 1], [8, 1]], 'black' => [[1, 8], [8, 8]] }
 
   def initialize(colour)
     super(colour)
@@ -43,7 +43,7 @@ class Knight < ChessPiece
   attr_accessor :chara, :colour, :square
 
   @@count = {'white' => 0, 'black' => 0}
-  @@initial_squares = { 'white' => [[[2], [1]], [[7], [1]]], 'black' => [[[2], [8]], [[7], [8]]] }
+  @@initial_squares = { 'white' => [[2, 1], [7, 1]], 'black' => [[2, 8], [7, 8]] }
 
   def initialize(colour)
     super(colour)
@@ -57,7 +57,7 @@ class Bishop < ChessPiece
   attr_accessor :chara, :colour, :square
 
   @@count = {'white' => 0, 'black' => 0}
-  @@initial_squares = { 'white' => [[[3], [1]], [[6], [1]]], 'black' => [[[3], [8]], [[6], [8]]] }
+  @@initial_squares = { 'white' => [[3, 1], [6, 1]], 'black' => [[3, 8], [6, 8]] }
 
   def initialize(colour)
     super(colour)
@@ -71,7 +71,7 @@ class Queen < ChessPiece
   attr_accessor :chara, :colour, :square
 
   @@count = {'white' => 0, 'black' => 0}
-  @@initial_squares = { 'white' => [[[4], [1]]], 'black' => [[[4], [8]]] }
+  @@initial_squares = { 'white' => [[4, 1]], 'black' => [[4, 8]] }
 
   def initialize(colour)
     super(colour)
@@ -85,7 +85,7 @@ class King < ChessPiece
   attr_accessor :chara, :colour, :square
 
   @@count = {'white' => 0, 'black' => 0}
-  @@initial_squares = { 'white' => [[[5], [1]]], 'black' => [[[5], [8]]] }
+  @@initial_squares = { 'white' => [[5, 1]], 'black' => [[5, 8]] }
 
   def initialize(colour)
     super(colour)
@@ -99,8 +99,8 @@ class Pawn < ChessPiece
   attr_accessor :chara, :colour, :square
 
   @@count = {'white' => 0, 'black' => 0}
-  @@initial_squares = { 'white' => [[[1], [2]], [[2], [2]], [[3], [2]], [[4], [2]], [[5], [2]], [[6], [2]], [[7], [2]], [[8], [2]]],
-                        'black' => [[[1], [7]], [[2], [7]], [[3], [7]], [[4], [7]], [[5], [7]], [[6], [7]], [[7], [7]], [[8], [7]]] }
+  @@initial_squares = { 'white' => [[1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2], [8, 2]],
+                        'black' => [[1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7], [8, 7]] }
 
   def initialize(colour)
     super(colour)

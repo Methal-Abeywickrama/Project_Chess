@@ -19,6 +19,8 @@
    g => 7
    h => 8
 
+  >>Universal format for a move
+  [colour, square]
 
   To be defined :=
 
