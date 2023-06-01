@@ -1,5 +1,7 @@
 To be defined:=
 
+>> write a way for each piece to know beforehand its possible moves
+
   >> define the superclass for the chess pieces
       ---Ongoing---
 

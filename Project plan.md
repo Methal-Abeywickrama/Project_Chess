@@ -1,5 +1,14 @@
   Project plan
 
+ >>Progress so far
+  : Board is created as a class, its a hash with the keys as the row no:, each containing an array of the columns
+  : Pieces are created as separate classes, each piece knows its own position at definition
+
+
+
+
+
+
  >> User inputs:-
   A system of selecting a square with a piece to move and selecting a destination to be moved into will used for convenience.
   Therefore, all user inputs will be 2 characters long ex: (h5)

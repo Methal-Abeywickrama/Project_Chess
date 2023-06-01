@@ -19,23 +19,27 @@ class ChessPiece
 end
 
 class Rook < ChessPiece
-  attr_accessor :square, :colour, :chara
+  attr_accessor :square, :colour, :chara, :possible_moves
 
   @@count = {'white' => 0, 'black' => 0}
   @@initial_squares = { 'white' => [[1, 1], [8, 1]], 'black' => [[1, 8], [8, 8]] }
+  @@transformations = [[0, 1], [1, 0], [-1, 0], [0, -1]]
 
   def initialize(colour)
     super(colour)
+    @possible_moves = []
     @@count[colour] += 1
     @square = @@initial_squares[colour][@@count[colour] - 1]
     @chara = @colour.eql?("black") ? "\u{265C}" : "\u{2656}"
     @moves_available = []
   end
 
-  # Calculates the possible moves that each piece can make without restrictions
-  def calculate_moves
+  # # Calculates the possible moves that each piece can make without restrictions
+  # def calculate_moves
+  #   @@transformations.each do |shift|
 
-  end
+  #   end
+  # end
 
 end
 

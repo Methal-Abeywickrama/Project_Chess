@@ -3,6 +3,7 @@
 require_relative 'chess_pieces'
 require_relative 'board_setup'
 require_relative 'user_input'
+require_relative 'piece_movements'
 
 # Represents a chess game board
 class Board
@@ -10,20 +11,21 @@ class Board
 
   include BoardSetup
   include UserInput
+  include PieceMovements
 
+  # Initializes the rows of the board
   def initialize
-    # Initializes the rows of the board
     @board = {}
     set_the_board
-    print_board
-    print_squares_board
-    input = take_and_input
-  end
+    cycle_through_pieces(:say_hi)
+    # input = take_and_input
 
+    move([2, 2], [9, 2])
+    print_board
+  end
 end
 
 game = Board.new
 
-
-# game.board.print 
+# game.board.print
 
