@@ -12,7 +12,7 @@ module PieceMovements
   def say_hi(row, column, piece)
     puts "row #{row}"
     puts "column #{column}"
-    puts "piece #{piece}"
+    p piece
   end
 
   # Calculates the possible moves that each piece can make without restrictions
@@ -23,7 +23,7 @@ module PieceMovements
         value.each_with_index do |item, column|
           next if [Blank, Integer].include?(item.class)
 
-          method(func).call(row, column, value)
+          method(func).call(row, column, item)
         end
     end
   end
