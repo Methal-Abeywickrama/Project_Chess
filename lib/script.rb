@@ -17,15 +17,16 @@ class Board
   def initialize
     @board = {}
     set_the_board
-    cycle_through_pieces(:say_hi)
+    cycle_through_pieces(:calculate_possible_moves)
     # input = take_and_input
 
     move([2, 2], [9, 2])
     print_board
+    # calculate_possible_moves
   end
 end
 
 game = Board.new
 
-# game.board.print
+
 

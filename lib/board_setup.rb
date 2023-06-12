@@ -7,18 +7,18 @@ def set_the_board
   # Sets labels for the columns
   @board[:labels] = ['*', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
   # Sets the white pieces column
-  @board[1] = set_column('white', 1)
+  @board[1] = set_column('white', '1')
   # Sets the white pawns column
-  @board[2] = set_pawn_column('white', 2)
+  @board[2] = set_pawn_column('white', '2')
   # Set the empty columns
-  @board[3] = set_empty_column(3)
-  @board[4] = set_empty_column(4)
-  @board[5] = set_empty_column(5)
-  @board[6] = set_empty_column(6)
+  @board[3] = set_empty_column('3')
+  @board[4] = set_empty_column('4')
+  @board[5] = set_empty_column('5')
+  @board[6] = set_empty_column('6')
   # Sets the black pawns column
-  @board[7] = set_pawn_column('black', 7)
+  @board[7] = set_pawn_column('black', '7')
   # Sets the black pieces column
-  @board[8] = set_column('black', 8)
+  @board[8] = set_column('black', '8')
   # Sets the labels for the columns
   @board[9] = ['*', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 end
