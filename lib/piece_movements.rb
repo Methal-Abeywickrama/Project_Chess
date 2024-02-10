@@ -26,14 +26,13 @@ module PieceMovements
 
         value.each_with_index do |item, column|
           next if [Blank, String].include?(item.class)
-          p item.class
 
           method(func).call(row, column, item)
         end
     end
   end
 
-  # Calls the relevant method on each piece
+  # Calls the relevant method on each piece to calculate its possible moves
   def calculate_possible_moves(row, column, piece)
     type = piece.class.to_s
     case type
@@ -66,7 +65,6 @@ module PieceMovements
         next_position = [next_position[0] + shift[0], next_position[1] + shift[1]]
       end
     end
-    p piece.possible_moves
   end
 
   # Calculates the possible moves for the knight
@@ -76,11 +74,9 @@ module PieceMovements
       current_position = [row, column]
       next_position = [current_position[0] + shift[0], current_position[1] + shift[1]]
       if valid_move?(next_position, piece.colour)
-        p next_position
         piece.possible_moves.push(next_position)
       end
     end
-    p piece.possible_moves
   end
 
   # Calculates the possible moves for the bishop
@@ -97,7 +93,6 @@ module PieceMovements
         next_position = [next_position[0] + shift[0], next_position[1] + shift[1]]
       end
     end
-    p piece.possible_moves
   end
 
   # Calculates the possible moves for the queen
@@ -114,7 +109,6 @@ module PieceMovements
         next_position = [next_position[0] + shift[0], next_position[1] + shift[1]]
       end
     end
-    p piece.possible_moves
   end
 
   # Calculates the possible moves for the king
@@ -124,11 +118,9 @@ module PieceMovements
       current_position = [row, column]
       next_position = [current_position[0] + shift[0], current_position[1] + shift[1]]
       if valid_move?(next_position, piece.colour)
-        p next_position
         piece.possible_moves.push(next_position)
       end
     end
-    p piece.possible_moves
   end
 
   # Calculates the possible moves for the pawn
@@ -146,14 +138,11 @@ module PieceMovements
       piece.possible_moves.push([current_position[0] + 1, current_position[1]])
     end
 
-    p piece.possible_moves
   end
 
   
   # Check the validity of a certain standard move for a pawn
   def valid_move_pawn?(row, column, colour='any')
-    p row
-    p column
     if !(row.between?(1, 8) && column.between?(1, 8))
       false
     elsif !(@board[row][column].instance_of?(Blank))
@@ -176,6 +165,7 @@ module PieceMovements
       false
     elsif @board[square[0]][square[1]].instance_of?(King)
       false
+      @check = true
     elsif @board[square[0]][square[1]].instance_of?(String) 
       false
     elsif @board[square[0]][square[1]].instance_of?(Blank)

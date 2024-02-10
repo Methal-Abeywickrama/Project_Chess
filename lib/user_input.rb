@@ -2,8 +2,8 @@
 
 # Includes all the methods related to taking and verifying an input from a user
 module UserInput
-  def take_and_input
-    input = get_user_input('white')
+  def take_an_input(colour)
+    input = get_user_input(colour)
     print input
     input
   end
@@ -29,24 +29,42 @@ module UserInput
 
   # Gets the input of the user for a move
   def get_user_input(color, start_square = 'initial', final_square = 'initial')
-    until squarewise_input_valid?(start_square)
-      puts 'Enter the square of the piece to be moved'
-      start_square = gets.chomp!.chars
+    valid_move_found = false
+    until valid_move_found
+      start_square = 'initial'
+      final_square = 'initial'
+      until squarewise_input_valid?(start_square)
+        puts 'Enter the square of the piece to be moved'
+        start_square = gets.chomp!.chars
+      end
+      # ///////  check the validity
+      until squarewise_input_valid?(final_square) && final_square != start_square
+        puts 'Enter the square to be moved into'
+        final_square = gets.chomp!.chars
+      end
+      # ///////  check the validity
+      st_sq = convert_input_to_standard(start_square)
+      end_sq = convert_input_to_standard(final_square)
+      puts 'sai'
+      puts @board[st_sq[0]][st_sq[1]]
+      p @board[st_sq[0]][st_sq[1]].possible_moves if @board[st_sq[0]][st_sq[1]].instance_of?(Knight)
+      if @board[st_sq[0]][st_sq[1]].instance_of?(Blank)
+        valid_move_found = false
+      elsif @board[st_sq[0]][st_sq[1]].possible_moves.include?(end_sq)
+        valid_move_found = true
+      else
+        valid_move_found = false
+      end
     end
-    # ///////  check the validity
-    until squarewise_input_valid?(final_square) && final_square != start_square
-      puts 'Enter the square to be moved into'
-      final_square = gets.chomp!.chars
-    end
-    # ///////  check the validity
-
-    [color, convert_input_to_standard(start_square), convert_input_to_standard(final_square)]
+    [color, st_sq, end_sq]
   end
 
   def convert_input_to_standard(square)
+    square_output = []
     reference = { 'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5, 'f' => 6, 'g' => 7, 'h' => 8 }
-    square[1] = reference[square[0]]
-    square[0] = square[1].to_i
-    square
+    square_output[1] = reference[square[0]]
+    square_output[0] = square[1].to_i
+    square_output
   end
+
 end

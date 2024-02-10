@@ -1,11 +1,11 @@
 To be defined:=
 
->> write a way for each piece to know beforehand its possible moves
+>> Check the inversion issue of numbering
 
+>> Flow structure for the game
+Creates the game board and the player profiles 
 
-  >> define the superclass for the chess pieces
-      ---Ongoing---
-
+>> Validity of user inputs
 
 >> def find_move_feasibility(move)
     # Case:01  start square, end square both the same color
@@ -17,5 +17,11 @@ To be defined:=
   end
 
 
+##  >> write a way for each piece to know beforehand its possible moves
+done, with the exception of pawn bypasses
+
+##  >> define the superclass for the chess pieces
+
+      ---Ongoing---
 
 
