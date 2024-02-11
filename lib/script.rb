@@ -55,7 +55,7 @@ end
 puts 'Lets play a game of chess'
 
 game = Board.new
-game.print_squares_board
+# game.print_squares_board
 
 until game.checkmate
   puts 'Player 1, enter your move'
@@ -68,6 +68,7 @@ until game.checkmate
   p u_input
   game.move(u_input[1], u_input[2])
   game.print_board
+  game.turn_end
   puts 'round'
 end
 

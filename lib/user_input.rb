@@ -48,8 +48,9 @@ module UserInput
       puts 'sai'
       puts @board[st_sq[0]][st_sq[1]]
       p @board[st_sq[0]][st_sq[1]].possible_moves if @board[st_sq[0]][st_sq[1]].instance_of?(Knight)
-      if @board[st_sq[0]][st_sq[1]].instance_of?(Blank)
+      if @board[st_sq[0]][st_sq[1]].instance_of?(Blank) || @board[st_sq[0]][st_sq[1]].colour != color
         valid_move_found = false
+        puts 'wrong colour dumbass'
       elsif @board[st_sq[0]][st_sq[1]].possible_moves.include?(end_sq)
         valid_move_found = true
       else

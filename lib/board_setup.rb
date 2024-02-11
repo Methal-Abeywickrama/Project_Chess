@@ -93,12 +93,6 @@ end
 # Prints the current state of the chess board in terms of its square
 def print_squares_board
   @board.each_with_index do |(key, value), n|
-    puts "the key is"
-    p key
-    puts 'the value is'
-    p value
-    puts 'n is'
-    p n
       puts '--------------------------------------------------------------------------'
       if key == :labels
         puts "| #{value.eql?('*') ? value.join(' | ') : value.join('  |  ')} |"

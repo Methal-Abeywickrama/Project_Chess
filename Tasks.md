@@ -1,6 +1,7 @@
 To be defined:=
 
 >> Check the inversion issue of numbering
+  Numbering is correct , hash must be printed in reverse order
 
 >> Flow structure for the game
 Creates the game board and the player profiles 
