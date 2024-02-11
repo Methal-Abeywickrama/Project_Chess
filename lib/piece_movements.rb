@@ -164,8 +164,8 @@ module PieceMovements
     if !(square[0].between?(1, 8) && square[1].between?(1, 8))
       false
     elsif @board[square[0]][square[1]].instance_of?(King)
-      false
       @check = true
+      false
     elsif @board[square[0]][square[1]].instance_of?(String) 
       false
     elsif @board[square[0]][square[1]].instance_of?(Blank)

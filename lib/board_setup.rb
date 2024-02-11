@@ -87,7 +87,7 @@ end
 #Reverses the order of hash so that a more accurate version of the board is printed
 def reverse_hash_board
   reverse_board = []
-  @board.each do |key, element| 
+  @board.each do |key, element|
     reverse_board.unshift([element, key])
   end
   reverse_board
