@@ -17,6 +17,9 @@ Creates the game board and the player profiles
     # Case:06  the king comes into check
   end
 
+  >> find a suitable method to print a board when playing as black
+  >> check with chatgpt why removing the brackets in print board fucks the method
+  >> Still possible to capture the king, no checks exist
 
 ##  >> write a way for each piece to know beforehand its possible moves
 done, with the exception of pawn bypasses

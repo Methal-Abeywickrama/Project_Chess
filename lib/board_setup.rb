@@ -68,15 +68,29 @@ end
 
 # Prints the current state of the chess board
 def print_board
-  @board.each_with_index do |(key, value), n|
-      puts '-------------------------------------'
-      if key == :labels
-        puts "| #{value.join(' | ')} |"
-      else 
-        puts "| #{ppt(value[0])} | #{ppt(value[1])} | #{ppt(value[2])} | #{ppt(value[3])} | #{ppt(value[4])} | #{ppt(value[5])} | #{ppt(value[6])} | #{ppt(value[7])} | #{ppt(value[8])} |"
-      end
+  reversed_board = reverse_hash_board
+    puts 'reversed board'
+  reversed_board.each do |array|
+    value = array[0]
+    key = array[1]
+
+    puts '-------------------------------------'
+    if key == :labels || key == 9
+      puts "| #{value.join(' | ')} |"
+    else 
+      puts "| #{ppt(value[0])} | #{ppt(value[1])} | #{ppt(value[2])} | #{ppt(value[3])} | #{ppt(value[4])} | #{ppt(value[5])} | #{ppt(value[6])} | #{ppt(value[7])} | #{ppt(value[8])} |"
+    end
   end
   puts '-------------------------------------'
+end
+
+#Reverses the order of hash so that a more accurate version of the board is printed
+def reverse_hash_board
+  reverse_board = []
+  @board.each do |key, element| 
+    reverse_board.unshift([element, key])
+  end
+  reverse_board
 end
 
 # Returns a printable representation of a postition of a square
@@ -92,7 +106,7 @@ end
 
 # Prints the current state of the chess board in terms of its square
 def print_squares_board
-  @board.each_with_index do |(key, value), n|
+  @board.each_with_index do |(key, value)|
       puts '--------------------------------------------------------------------------'
       if key == :labels
         puts "| #{value.eql?('*') ? value.join(' | ') : value.join('  |  ')} |"
