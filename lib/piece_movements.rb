@@ -19,7 +19,7 @@ module PieceMovements
     cycle_through_pieces(:say_hi)
   end
 
-  # Calculates the possible moves that each piece can make without restrictions
+  # Cycles through each square to return the pieces to execute methods for them. Returns the board
   def cycle_through_pieces(func)
     @board.each do |row, value|
       next if [:labels, 9].include?(row)
@@ -30,6 +30,20 @@ module PieceMovements
           method(func).call(row, column, item)
         end
     end
+  end
+
+  # Cycles through each square of the board to return pieces to check for checks
+  def cycle_through_pieces_for_checks(func)
+    @board.each do |row, value|
+      next if [:labels, 9].include?(row)
+
+        value.each_with_index do |item, column|
+          next if [Blank, String].include?(item.class)
+
+          return true if method(func).call(row, column, item)
+        end
+    end
+    false
   end
 
   # Calls the relevant method on each piece to calculate its possible moves
@@ -140,6 +154,20 @@ module PieceMovements
 
   end
 
+  #Check if the king is in check by a particular piece
+  def check_for_checks(row, column, piece)
+    return false if piece.instance_of?(King)
+
+    check = false
+    piece.possible_moves.each do |square|
+      targetted_piece = @board[square[0]][square[1]] unless @board[square[0]][square[1]].instance_of?(Blank)
+      if targetted_piece.instance_of?(King) && targetted_piece.colour != piece.colour
+        return true 
+      end
+    end
+    check
+  end
+
   
   # Check the validity of a certain standard move for a pawn
   def valid_move_pawn?(row, column, colour='any')
@@ -163,8 +191,8 @@ module PieceMovements
   def valid_move?(square, colour)
     if !(square[0].between?(1, 8) && square[1].between?(1, 8))
       false
-    elsif @board[square[0]][square[1]].instance_of?(King)
-      @check = true
+    elsif @board[square[0]][square[1]].instance_of?(King) && @board[square[0]][square[1]].colour == colour
+      p square
       false
     elsif @board[square[0]][square[1]].instance_of?(String) 
       false
