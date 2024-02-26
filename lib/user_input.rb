@@ -2,8 +2,8 @@
 
 # Includes all the methods related to taking and verifying an input from a user
 module UserInput
-  def take_an_input(colour)
-    input = get_user_input(colour)
+  def take_an_input(colour, initial='initial', final='final')
+    input = get_user_input(colour, initial, final)
     print input
     input
   end
@@ -28,29 +28,29 @@ module UserInput
   end
 
   # Gets the input of the user for a move
-  def get_user_input(color, start_square = 'initial', final_square = 'initial')
+  def get_user_input(color, start_square = 'initial', final_square = 'initial', moves)
     valid_move_found = false
     until valid_move_found
       start_square = 'initial'
       final_square = 'initial'
       until squarewise_input_valid?(start_square)
         puts 'Enter the square of the piece to be moved'
-        start_square = gets.chomp!.chars
+        start_square = gets.chomp!.chars unless squarewise_input_valid?(start_square)
       end
       # ///////  check the validity
       until squarewise_input_valid?(final_square) && final_square != start_square
         puts 'Enter the square to be moved into'
-        final_square = gets.chomp!.chars
+        final_square = gets.chomp!.chars 
       end
       # ///////  check the validity
       st_sq = convert_input_to_standard(start_square)
       end_sq = convert_input_to_standard(final_square)
-      puts 'sai'
-      puts @board[st_sq[0]][st_sq[1]]
-      p @board[st_sq[0]][st_sq[1]].possible_moves if @board[st_sq[0]][st_sq[1]].instance_of?(Knight)
       if @board[st_sq[0]][st_sq[1]].instance_of?(Blank) || @board[st_sq[0]][st_sq[1]].colour != color
         valid_move_found = false
         puts 'wrong colour dumbass'
+      elsif is_check?()
+        puts 'Illegal move '
+        valid_move_found = false
       elsif @board[st_sq[0]][st_sq[1]].possible_moves.include?(end_sq)
         valid_move_found = true
       else

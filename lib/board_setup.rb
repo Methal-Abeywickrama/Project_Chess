@@ -69,7 +69,6 @@ end
 # Prints the current state of the chess board
 def print_board
   reversed_board = reverse_hash_board
-    puts 'reversed board'
   reversed_board.each do |array|
     value = array[0]
     key = array[1]
