@@ -32,39 +32,39 @@ class Board
   # methods to be executed at the end of each turn
   def turn_end(player, opponent, game, moves)
     cycle_through_pieces(:calculate_possible_moves)
-    opponent.check = cycle_through_pieces_for_checks(:check_for_checks)
+    opponent.check = cycle_through_pieces_for_checks(:check_for_checks, game.board)
     p opponent.check
     if game.board[7][5].instance_of?(King)
       puts 'gyrados'
     end
     if opponent.check
-      mated = true
-      puts 'reached here'
-      new_game = Board.new
-      new_moves = moves.dup
-      until new_moves.empty?
-        move_input = new_moves.shift
-        new_game.move(move_input[1], move_input[2])
-      end
-      possibilities = new_game.cycle_through_pieces_moves(:return_each_possible_move, opponent.colour)
-      p possibilities
-      while mated && !possibilities.empty?
-        new_game.move(possibilities.shift, possibilities.shift)
-        mated = new_game.cycle_through_pieces_for_checks(:check_for_checks)
-        new_game = Board.new
-        new_moves = moves.dup
-        until new_moves.empty?
-          move_input = new_moves.shift
-          new_game.move(move_input[1], move_input[2])
-        end
-      end
+      # mated = true
+      # puts 'reached here'
+      # new_game = Board.new
+      # new_moves = moves.dup
+      # until new_moves.empty?
+      #   move_input = new_moves.shift
+      #   new_game.move(move_input[1], move_input[2])
+      # end
+      # possibilities = new_game.cycle_through_pieces_moves(:return_each_possible_move, opponent.colour)
+      # p possibilities
+      # while mated && !possibilities.empty?
+      #   new_game.move(possibilities.shift, possibilities.shift)
+      #   mated = new_game.cycle_through_pieces_for_checks(:check_for_checks)
+      #   new_game = Board.new
+      #   new_moves = moves.dup
+      #   until new_moves.empty?
+      #     move_input = new_moves.shift
+      #     new_game.move(move_input[1], move_input[2])
+      #   end
+      # end
 
-      if mated
-        puts 'mated'
-      else 
-        puts 'not mated'
-      end
-      #  
+      # if mated
+      #   puts 'mated'
+      # else 
+      #   puts 'not mated'
+      # end
+      # #  
 
 
 
@@ -78,11 +78,11 @@ class Board
     print_board
   end
 
-  # def print_pieces(row, column, piece)
-  #   p piece.class
-  #   p piece.colour
+  def print_pieces(row, column, piece)
+    p piece.class
+    p piece.colour
 
-  # end
+  end
 end
 
 # Represents a human player
@@ -111,17 +111,17 @@ won = false
 
 until won
   puts "#{player1.name}, enter your move"
-  u_input = game.take_an_input('white', moves)
+  u_input = game.take_an_input('white', moves.dup)
   p u_input
-  moves game.move(u_input[1], u_input[2])
+  moves += game.move(u_input[1], u_input[2])
   game.turn_end(player1, player2, game, moves.dup)
   # won = game.is_checkmate?
   next if won
   
   puts "#{player2.name}, enter your move"
-  u_input = game.take_an_input('black', moves)
+  u_input = game.take_an_input('black', moves.dup)
   p u_input
-  moves + game.move(u_input[1], u_input[2])
+  moves += game.move(u_input[1], u_input[2])
   game.turn_end(player2, player1, game, moves.dup)
   # won = game.is_checkmate?
   puts 'round'

@@ -2,8 +2,8 @@
 
 # Includes all the methods related to taking and verifying an input from a user
 module UserInput
-  def take_an_input(colour, initial='initial', final='final')
-    input = get_user_input(colour, initial, final)
+  def take_an_input(colour, moves)
+    input = get_user_input(colour, moves)
     print input
     input
   end
@@ -28,7 +28,7 @@ module UserInput
   end
 
   # Gets the input of the user for a move
-  def get_user_input(color, start_square = 'initial', final_square = 'initial', moves)
+  def get_user_input(color, moves)
     valid_move_found = false
     until valid_move_found
       start_square = 'initial'
@@ -48,7 +48,7 @@ module UserInput
       if @board[st_sq[0]][st_sq[1]].instance_of?(Blank) || @board[st_sq[0]][st_sq[1]].colour != color
         valid_move_found = false
         puts 'wrong colour dumbass'
-      elsif is_check?()
+      elsif is_check?(moves, st_sq, end_sq)
         puts 'Illegal move '
         valid_move_found = false
       elsif @board[st_sq[0]][st_sq[1]].possible_moves.include?(end_sq)
