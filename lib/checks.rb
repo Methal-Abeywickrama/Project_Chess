@@ -2,19 +2,20 @@
 
 module Checks
 
-  def is_check?(moves, st_sq, end_sq)
+  def is_check?(moves, st_sq, end_sq, colour)
     return false if moves.empty?
 
     new_board = Board.new
-    until moves.empty?
-      new_board.move(moves.shift, moves.shift)
+    move_list = moves.dup
+    until move_list.empty?
+      new_board.move(move_list.shift, move_list.shift)
       new_board.cycle_through_pieces(:calculate_possible_moves)
     end
     new_board.move(st_sq, end_sq)
     new_board.cycle_through_pieces(:calculate_possible_moves)
-    new_board.print_board
-    new_board.print_pieces
-    new_board.cycle_through_pieces_for_checks(:check_for_checks, new_board.board)
+    # new_board.print_board
+    # new_board.print_pieces
+    new_board.cycle_through_pieces_for_checks(:check_for_checks, new_board.board, colour)
     
   end
 
@@ -24,7 +25,7 @@ module Checks
 
     check = false
     piece.possible_moves.each do |square|
-      targetted_piece = board[square[0]][square[1]] unless board[square[0]][square[1]].instance_of?(Blank)
+      targetted_piece = board[square[1]][square[0]] unless board[square[1]][square[0]].instance_of?(Blank)
       if targetted_piece.instance_of?(King) && targetted_piece.colour != piece.colour
         return true 
       end
@@ -36,11 +37,7 @@ module Checks
     new_board = Board.new
     move_list = moves.dup
     until move_list.empty?
-      begin
-        
-        new_board.move(move_list.shift, move_list.shift)
-      rescue => exception
-      end
+      new_board.move(move_list.shift, move_list.shift)
       new_board.cycle_through_pieces(:calculate_possible_moves)
     end
     new_board.cycle_through_pieces3(:check_checkmate, player_colour, moves)

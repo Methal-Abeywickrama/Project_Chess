@@ -27,17 +27,18 @@ class Board
   # methods to be executed at the end of each turn
   def turn_end(player, opponent, game, moves)
     cycle_through_pieces(:calculate_possible_moves)
-    opponent.check = cycle_through_pieces_for_checks(:check_for_checks, game.board)
+    opponent.check = cycle_through_pieces_for_checks(:check_for_checks, game.board, opponent.colour)
     p opponent.check
  
     if opponent.check
-     if checkmate?(moves.dup, player.colour)
-      puts 'its a checkmate'
-     else  
-      puts 'no checkmate'
-     end
+      puts 'its a check'
+    #  if checkmate?(moves.dup, player.colour)
+    #   puts 'its a checkmate'
+    #  else  
+    #   puts 'no checkmate'
+    #  end
     end
-    cycle_through_pieces(:print_pieces)
+    # cycle_through_pieces(:print_pieces)
     print_board
   end
 
@@ -69,7 +70,7 @@ player2 = Player.new('Player 2', 'black')
 
 game = Board.new
 game.print_board
-game.cycle_through_pieces(:print_pieces)
+# game.cycle_through_pieces(:print_pieces)
 
 moves = []
 # puts game.board

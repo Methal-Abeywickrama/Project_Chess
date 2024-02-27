@@ -59,12 +59,12 @@ module PieceMovements
   end
 
   # Cycles through each square of the board to return pieces to check for checks
-  def cycle_through_pieces_for_checks(func, board)
+  def cycle_through_pieces_for_checks(func, board, colour)
     board.each do |row, value|
       next if [:labels, 9].include?(row)
 
         value.each_with_index do |item, column|
-          next if [Blank, String].include?(item.class)
+          next if [Blank, String].include?(item.class) || item.colour == colour 
  
           return true  if method(func).call(row, column, item, board)
         end

@@ -25,9 +25,6 @@ Creates the game board and the player profiles
     # Case:06  the king comes into check
   end
 
- >> Pawns have a problem containing common intial square
- >> Duplication of possible moves after each turn when the piece does not move
- >> Pawn captures
 
 >> find a suitable method to print a board when playing as black
 >> change the unicode characters for black and white
@@ -35,7 +32,10 @@ Creates the game board and the player profiles
 done, with the exception of pawn bypasses
 
 ## no checks exist
-##  >> define the superclass for the chess pieces
+## define the superclass for the chess pieces
+## Pawns have a problem containing common intial square
+## Duplication of possible moves after each turn when the piece does not move
+## Pawn captures
 
       ---Ongoing---
 
