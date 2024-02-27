@@ -48,7 +48,7 @@ module UserInput
       if @board[st_sq[1]][st_sq[0]].instance_of?(Blank) || @board[st_sq[1]][st_sq[0]].colour != color
         valid_move_found = false
         puts 'wrong colour dumbass'
-      elsif @board[st_sq[1]][st_sq[0]].possible_moves.include?(end_sq.reverse)
+      elsif @board[st_sq[1]][st_sq[0]].possible_moves.include?(end_sq)
         valid_move_found = true
       elsif is_check?(moves, st_sq, end_sq)
         puts 'Illegal move '

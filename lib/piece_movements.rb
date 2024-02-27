@@ -192,7 +192,7 @@ module PieceMovements
       targetted_piece = false
 
       while valid_move?(next_position, piece.colour) && !targetted_piece
-        piece.possible_moves.push(next_position)
+        piece.possible_moves.push(next_position.reverse)
         targetted_piece = target_acquired?(next_position)
         next_position = [next_position[0] + shift[0], next_position[1] + shift[1]]
       end
@@ -207,7 +207,7 @@ module PieceMovements
       current_position = [row, column]
       next_position = [current_position[0] + shift[0], current_position[1] + shift[1]]
       if valid_move?(next_position, piece.colour)
-        piece.possible_moves.push(next_position)
+        piece.possible_moves.push(next_position.reverse)
       end
     end
   end
@@ -222,7 +222,7 @@ module PieceMovements
       targetted_piece = false
 
       while valid_move?(next_position, piece.colour) && !targetted_piece
-        piece.possible_moves.push(next_position)
+        piece.possible_moves.push(next_position.reverse)
         targetted_piece = target_acquired?(next_position)
         next_position = [next_position[0] + shift[0], next_position[1] + shift[1]]
       end
@@ -239,7 +239,7 @@ module PieceMovements
       targetted_piece = false
 
       while valid_move?(next_position, piece.colour) && !targetted_piece
-        piece.possible_moves.push(next_position)
+        piece.possible_moves.push(next_position.reverse)
         targetted_piece = target_acquired?(next_position)
         next_position = [next_position[0] + shift[0], next_position[1] + shift[1]]
       end
@@ -254,7 +254,7 @@ module PieceMovements
       current_position = [row, column]
       next_position = [current_position[0] + shift[0], current_position[1] + shift[1]]
       if valid_move?(next_position, piece.colour)
-        piece.possible_moves.push(next_position)
+        piece.possible_moves.push(next_position.reverse)
       end
     end
   end
@@ -265,39 +265,39 @@ module PieceMovements
     piece.possible_moves = []
 
     if row == 2 && piece.colour == 'white'
-      piece.possible_moves.push([current_position[0] + 2, current_position[1]]) if valid_move_pawn?(current_position[0] + 2, current_position[1], 'white')
-      piece.possible_moves.push([current_position[0] + 1, current_position[1]]) if valid_move_pawn?(current_position[0] + 1, current_position[1], 'white')
+      piece.possible_moves.push([current_position[1], current_position[0] + 2]) if valid_move_pawn?(current_position[0] + 2, current_position[1], 'white')
+      piece.possible_moves.push([current_position[1], current_position[0] + 1]) if valid_move_pawn?(current_position[0] + 1, current_position[1], 'white')
       # white pawn capture
       if @board[row+1][column+1].is_a?(ChessPiece) && @board[row+1][column+1].colour != piece.colour
-        piece.possible_moves.push([current_position[0] + 1, current_position[1] + 1])
+        piece.possible_moves.push([current_position[1] + 1, current_position[0] + 1])
       elsif @board[row+1][column-1].is_a?(ChessPiece) && @board[row+1][column-1].colour != piece.colour
-        piece.possible_moves.push([current_position[0] + 1, current_position[1] - 1])
+        piece.possible_moves.push([current_position[1] - 1, current_position[0] + 1])
       end
     elsif piece.colour == 'white' && valid_move_pawn?(current_position[0] + 1, current_position[1], 'white')
-      piece.possible_moves.push([current_position[0] + 1, current_position[1]])
+      piece.possible_moves.push([current_position[1], current_position[0] + 1])
       # white pawn capture
       if @board[row+1][column+1].is_a?(ChessPiece) && @board[row+1][column+1].colour != piece.colour
-        piece.possible_moves.push([current_position[0] + 1, current_position[1] + 1])
+        piece.possible_moves.push([current_position[1] + 1, current_position[0] + 1])
       elsif @board[row+1][column-1].is_a?(ChessPiece) && @board[row+1][column-1].colour != piece.colour
-        piece.possible_moves.push([current_position[0] + 1, current_position[1] - 1])
+        piece.possible_moves.push([current_position[1] - 1, current_position[0] + 1])
       end
     
     elsif row == 7 && piece.colour == 'black'
-      piece.possible_moves.push([current_position[0] - 2, current_position[1]]) if valid_move_pawn?(current_position[0] - 2, current_position[1], 'black')
-      piece.possible_moves.push([current_position[0] - 1, current_position[1]]) if valid_move_pawn?(current_position[0] - 1, current_position[1], 'black')
+      piece.possible_moves.push([current_position[1], current_position[0] - 2]) if valid_move_pawn?(current_position[0] - 2, current_position[1], 'black')
+      piece.possible_moves.push([current_position[1], current_position[0] - 1]) if valid_move_pawn?(current_position[0] - 1, current_position[1], 'black')
        # black pawn capture
        if @board[row-1][column+1].is_a?(ChessPiece) && @board[row-1][column+1].colour != piece.colour
-        piece.possible_moves.push([current_position[0] - 1, current_position[1] + 1])
+        piece.possible_moves.push([current_position[1] + 1, current_position[0] - 1])
        elsif @board[row-1][column-1].is_a?(ChessPiece) && @board[row-1][column-1].colour != piece.colour
-        piece.possible_moves.push([current_position[0] - 1, current_position[1] - 1])
+        piece.possible_moves.push([current_position[1] - 1, current_position[0] - 1])
        end
     elsif piece.colour == 'black' && valid_move_pawn?(current_position[0] - 1, current_position[1], 'black')
-      piece.possible_moves.push([current_position[0] - 1, current_position[1]])
+      piece.possible_moves.push([current_position[1], current_position[0] - 1])
        # black pawn capture
        if @board[row-1][column+1].is_a?(ChessPiece) && @board[row-1][column+1].colour != piece.colour
-        piece.possible_moves.push([current_position[0] - 1, current_position[1] + 1])
+        piece.possible_moves.push([current_position[1] + 1, current_position[0] - 1])
        elsif @board[row-1][column-1].is_a?(ChessPiece) && @board[row-1][column-1].colour != piece.colour
-        piece.possible_moves.push([current_position[0] - 1, current_position[1] - 1])
+        piece.possible_moves.push([current_position[1] - 1, current_position[0] - 1])
        end
     end
 
