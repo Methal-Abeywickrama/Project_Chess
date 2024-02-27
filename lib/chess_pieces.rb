@@ -38,16 +38,10 @@ class Rook < ChessPiece
     @count[colour] += 1
     @@piece_count[colour] += 1
     @square = @@initial_squares[colour][@@piece_count[colour] - 1]
+    @@piece_count[colour] = 0 if @@piece_count == 2
     @chara = @colour.eql?("black") ? "\u{265C}" : "\u{2656}"
     # @possible_moves = calculate_moves_rook(@square[0], @square[1], colour)
   end
-
-  # # Calculates the possible moves that each piece can make without restrictions
-  # def calculate_moves
-  #   @@transformations.each do |shift|
-
-  #   end
-  # end
 
 end
 
@@ -65,6 +59,7 @@ class Knight < ChessPiece
     @count[colour] += 1
     @@piece_count[colour] += 1
     @square = @@initial_squares[colour][@@piece_count[colour] - 1]
+    @@piece_count[colour] = 0 if @@piece_count == 2
     @chara = @colour.eql?("black") ? "\u{265E}" : "\u{2658}"
   end
 end
@@ -83,6 +78,7 @@ class Bishop < ChessPiece
     @count[colour] += 1
     @@piece_count[colour] += 1
     @square = @@initial_squares[colour][@@piece_count[colour] - 1]
+    @@piece_count[colour] = 0 if @@piece_count == 2
     @chara = @colour.eql?("black") ? "\u{265D}" : "\u{2657}"
   end
 end
@@ -91,7 +87,6 @@ end
 class Queen < ChessPiece
   attr_accessor :chara, :colour, :square, :possible_moves
 
-  @@piece_count = { 'white' => 0, 'black' => 0 }
   @@initial_squares = { 'white' => [[4, 1]], 'black' => [[4, 8]] }
   
   def initialize(colour)
@@ -99,8 +94,7 @@ class Queen < ChessPiece
     @count = {'white' => 0, 'black' => 0}
     @possible_moves = []
     @count[colour] += 1
-    @@piece_count[colour] += 1
-    @square = @@initial_squares[colour][@@piece_count[colour] - 1]
+    @square = @@initial_squares[colour][0]
     @chara = @colour.eql?("black") ? "\u{265B}" : "\u{2655}"
   end
 end
@@ -136,6 +130,7 @@ class Pawn < ChessPiece
     @count[colour] += 1
     @@piece_count[colour] += 1
     @square = @@initial_squares[colour][@@piece_count[colour] - 1]
+    @@piece_count[colour] = 0 if @@piece_count == 8
     @chara = @colour.eql?("black") ? "\u{265F}" : "\u{2659}"
   end
 end

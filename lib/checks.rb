@@ -12,6 +12,8 @@ module Checks
     end
     new_board.move(st_sq, end_sq)
     new_board.cycle_through_pieces(:calculate_possible_moves)
+    new_board.print_board
+    new_board.print_pieces
     new_board.cycle_through_pieces_for_checks(:check_for_checks, new_board.board)
     
   end
@@ -41,7 +43,6 @@ module Checks
       end
       new_board.cycle_through_pieces(:calculate_possible_moves)
     end
-    puts 'at least here'
     new_board.cycle_through_pieces3(:check_checkmate, player_colour, moves)
 
   end
