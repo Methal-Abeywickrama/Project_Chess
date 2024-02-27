@@ -194,6 +194,7 @@ module PieceMovements
   # Calculates the possible moves for the rook
   def calculate_moves_rook(row, column, piece)
     transformations = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+    piece.possible_moves = []
     transformations.each do |shift|
       current_position = [row, column]
       next_position = [current_position[0] + shift[0], current_position[1] + shift[1]]
@@ -210,6 +211,7 @@ module PieceMovements
   # Calculates the possible moves for the knight
   def calculate_moves_knight(row, column, piece)
     transformations = [[1, 2], [1, -2], [-1, 2], [-1, -2], [2, 1], [2, -1], [-2, 1], [-2, -1]]
+    piece.possible_moves = []
     transformations.each do |shift|
       current_position = [row, column]
       next_position = [current_position[0] + shift[0], current_position[1] + shift[1]]
@@ -222,6 +224,7 @@ module PieceMovements
   # Calculates the possible moves for the bishop
   def calculate_moves_bishop(row, column, piece)
     transformations = [[1, 1], [-1, -1], [1, -1], [-1, 1]]
+    piece.possible_moves = []
     transformations.each do |shift|
       current_position = [row, column]
       next_position = [current_position[0] + shift[0], current_position[1] + shift[1]]
@@ -238,6 +241,7 @@ module PieceMovements
   # Calculates the possible moves for the queen
   def calculate_moves_queen(row, column, piece)
     transformations = [[1, 1], [-1, -1], [1, -1], [-1, 1], [1, 0], [0, 1], [-1, 0], [0, -1]]
+    piece.possible_moves = []
     transformations.each do |shift|
       current_position = [row, column]
       next_position = [current_position[0] + shift[0], current_position[1] + shift[1]]
@@ -254,6 +258,7 @@ module PieceMovements
   # Calculates the possible moves for the king
   def calculate_moves_king(row, column, piece)
     transformations = [[1, 1], [-1, -1], [1, -1], [-1, 1], [1, 0], [0, 1], [-1, 0], [0, -1]]
+    piece.possible_moves = []
     transformations.each do |shift|
       current_position = [row, column]
       next_position = [current_position[0] + shift[0], current_position[1] + shift[1]]
@@ -266,6 +271,7 @@ module PieceMovements
   # Calculates the possible moves for the pawn
   def calculate_moves_pawn(row, column, piece)
     current_position = [row, column]
+    piece.possible_moves = []
     if row == 2 && piece.colour == 'white'
       piece.possible_moves.push([current_position[0] + 2, current_position[1]]) if valid_move_pawn?(current_position[0] + 2, current_position[1], 'white')
       piece.possible_moves.push([current_position[0] + 1, current_position[1]]) if valid_move_pawn?(current_position[0] + 1, current_position[1], 'white')
@@ -274,8 +280,8 @@ module PieceMovements
     elsif row == 7 && piece.colour == 'black'
       piece.possible_moves.push([current_position[0] - 2, current_position[1]]) if valid_move_pawn?(current_position[0] - 2, current_position[1], 'black')
       piece.possible_moves.push([current_position[0] - 1, current_position[1]]) if valid_move_pawn?(current_position[0] - 1, current_position[1], 'black')
-    elsif piece.colour == 'black' && valid_move_pawn?(current_position[0] + 1, current_position[1], 'black')
-      piece.possible_moves.push([current_position[0] + 1, current_position[1]])
+    elsif piece.colour == 'black' && valid_move_pawn?(current_position[0] - 1, current_position[1], 'black')
+      piece.possible_moves.push([current_position[0] - 1, current_position[1]])
     end
 
   end
@@ -310,7 +316,6 @@ module PieceMovements
     check
   end
 
-  
   # Check the validity of a certain standard move for a pawn
   def valid_move_pawn?(row, column, colour='any')
     if !(row.between?(1, 8) && column.between?(1, 8))
