@@ -28,14 +28,14 @@ module BoardSetup
   def set_column(colour, letter)
     column = []
     column[0] = letter
-    column[1] = Rook.new(colour)
-    column[2] = Knight.new(colour)
-    column[3] = Bishop.new(colour)
+    column[1] = Rook.new(colour, 1)
+    column[2] = Knight.new(colour, 1)
+    column[3] = Bishop.new(colour, 1)
     column[4] = Queen.new(colour)
     column[5] = King.new(colour)
-    column[6] = Bishop.new(colour)
-    column[7] = Knight.new(colour)
-    column[8] = Rook.new(colour)
+    column[6] = Bishop.new(colour, 2)
+    column[7] = Knight.new(colour, 2)
+    column[8] = Rook.new(colour, 3)
     column
   end
 
@@ -44,10 +44,11 @@ module BoardSetup
     column = []
     column[0] = letter
     for i in 1..8 do
-      column[i] = Pawn.new(colour)
+      column[i] = Pawn.new(colour, i)
     end
     column
   end
+
 
   # Sets up an empty column
   def set_empty_column(letter)

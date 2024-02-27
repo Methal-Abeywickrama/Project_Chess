@@ -32,11 +32,11 @@ class Board
  
     if opponent.check
       puts 'its a check'
-    #  if checkmate?(moves.dup, player.colour)
-    #   puts 'its a checkmate'
-    #  else  
-    #   puts 'no checkmate'
-    #  end
+     if checkmate?(moves.dup, player.colour)
+      puts 'its a checkmate'
+     else  
+      puts 'no checkmate'
+     end
     end
     # cycle_through_pieces(:print_pieces)
     print_board

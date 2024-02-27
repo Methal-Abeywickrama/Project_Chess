@@ -40,50 +40,28 @@ module Checks
       new_board.move(move_list.shift, move_list.shift)
       new_board.cycle_through_pieces(:calculate_possible_moves)
     end
-    new_board.cycle_through_pieces3(:check_checkmate, player_colour, moves)
+    # new_board..cycle_through_pieces(:print_pieces)
+    # new_board.print_board
 
+    new_board.cycle_through_pieces3(:check_checkmate, player_colour, moves)
   end
 
   def check_checkmate(row, column, piece, moves)
     piece.possible_moves.each do |move|
       newer_board = Board.new
+      newer_board..cycle_through_pieces(:print_pieces)
+      newer_board.print_board
       move_list = moves.dup
       until move_list.empty?
         newer_board.move(move_list.shift, move_list.shift)
         newer_board.cycle_through_pieces(:calculate_possible_moves)
       end
-      begin
-        st_sq = piece.square.reverse
-        move.reverse!
-        puts 'slipped once'
-      newer_board.move(st_sq, move)
+      puts "the piece is #{piece} the move is #{move}"
+      p piece
+      p move
+      newer_board.move(piece.square, move)
       newer_board.cycle_through_pieces(:calculate_possible_moves)
-      rescue
-        p 'wher'
-        p piece
-      end
-      # begin
-      #   # return false unless newer_board.is_check?(moves.dup, st_sq, move)
-      #   if newer_board.is_check?(moves.dup, st_sq, move)
-      #     puts 'ok then'
-      #   else  
-      #     puts 'otherwise'
-      #     p st_sq
-      #     p move
-      #     P piece
-      #     return false
-      #   end
-      # rescue => exception
-      #   p st_sq
-      #   p move
-      # end
-      puts 'winner is '
-      p cycle_through_pieces_for_checks(:check_for_checks, newer_board.board)
-      unless cycle_through_pieces_for_checks(:check_for_checks, newer_board.board)
-        p piece
-        newer_board.print_board
-      end
-      return false unless cycle_through_pieces_for_checks(:check_for_checks, newer_board.board)
+
     end
     true
   end
