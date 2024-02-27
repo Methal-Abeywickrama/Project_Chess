@@ -67,7 +67,6 @@ module PieceMovements
     new_list
   end
 
-
   # Cycles through each square of the board to return pieces to check for checks
   def cycle_through_pieces_for_checks(func, board)
     board.each do |row, value|
@@ -281,19 +280,7 @@ module PieceMovements
 
   end
 
-  #Check if the king is in check by a particular piece
-  def check_for_checks(row, column, piece, board)
-    return false if piece.instance_of?(King)
-
-    check = false
-    piece.possible_moves.each do |square|
-      targetted_piece = board[square[0]][square[1]] unless board[square[0]][square[1]].instance_of?(Blank)
-      if targetted_piece.instance_of?(King) && targetted_piece.colour != piece.colour
-        return true 
-      end
-    end
-    check
-  end
+ 
 
   #Check if the king is in check by a particular piece for new board
   def check_for_checks_within(row, column, piece, board)

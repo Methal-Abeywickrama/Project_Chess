@@ -18,7 +18,6 @@ class Board
   # Initializes the rows of the board
   def initialize(board = {})
     @check = false
-    @checkmate = false
     @board = board
     set_the_board if @board.empty?
     cycle_through_pieces(:calculate_possible_moves)
@@ -38,42 +37,11 @@ class Board
       puts 'gyrados'
     end
     if opponent.check
-      # mated = true
-      # puts 'reached here'
-      # new_game = Board.new
-      # new_moves = moves.dup
-      # until new_moves.empty?
-      #   move_input = new_moves.shift
-      #   new_game.move(move_input[1], move_input[2])
-      # end
-      # possibilities = new_game.cycle_through_pieces_moves(:return_each_possible_move, opponent.colour)
-      # p possibilities
-      # while mated && !possibilities.empty?
-      #   new_game.move(possibilities.shift, possibilities.shift)
-      #   mated = new_game.cycle_through_pieces_for_checks(:check_for_checks)
-      #   new_game = Board.new
-      #   new_moves = moves.dup
-      #   until new_moves.empty?
-      #     move_input = new_moves.shift
-      #     new_game.move(move_input[1], move_input[2])
-      #   end
-      # end
-
-      # if mated
-      #   puts 'mated'
-      # else 
-      #   puts 'not mated'
-      # end
-      # #  
-
-
-
-
-      # if is_checkmate?(opponent.colour)
-      #   puts 'iits a checkmate'
-      # else
-      #   puts 'ints not checkmate'
-      # end
+     if checkmate?(moves.dup, player.colour)
+      puts 'its a checkmate'
+     else  
+      puts 'no checkmate'
+     end
     end
     print_board
   end
@@ -108,7 +76,6 @@ game.print_board
 moves = []
 # puts game.board
 won = false
-
 until won
   puts "#{player1.name}, enter your move"
   u_input = game.take_an_input('white', moves.dup)
