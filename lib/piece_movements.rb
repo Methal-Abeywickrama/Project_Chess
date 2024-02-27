@@ -5,10 +5,6 @@ module PieceMovements
 
   def move(previous_square, new_square)
     piece = @board[previous_square[1]][previous_square[0]]
-    puts 'previous square is'
-    p previous_square
-    puts 'new square is'
-    p new_square
 
     @board[new_square[1]][new_square[0]] = piece
     @board[new_square[1]][new_square[0]].square = new_square
@@ -22,11 +18,6 @@ module PieceMovements
     puts "column #{column}"
     p piece
   end
-
-  # Redundant method
-  # def calculate_moves_each
-  #   cycle_through_pieces(:say_hi)
-  # end
 
   # Cycles through each square to return the pieces to execute methods for them. Returns the board
   def cycle_through_pieces(func)
@@ -272,16 +263,42 @@ module PieceMovements
   def calculate_moves_pawn(row, column, piece)
     current_position = [row, column]
     piece.possible_moves = []
+
     if row == 2 && piece.colour == 'white'
       piece.possible_moves.push([current_position[0] + 2, current_position[1]]) if valid_move_pawn?(current_position[0] + 2, current_position[1], 'white')
       piece.possible_moves.push([current_position[0] + 1, current_position[1]]) if valid_move_pawn?(current_position[0] + 1, current_position[1], 'white')
+      # white pawn capture
+      if @board[row+1][column+1].is_a?(ChessPiece) && @board[row+1][column+1].colour != piece.colour
+        piece.possible_moves.push([current_position[0] + 1, current_position[1] + 1])
+      elsif @board[row+1][column-1].is_a?(ChessPiece) && @board[row+1][column-1].colour != piece.colour
+        piece.possible_moves.push([current_position[0] + 1, current_position[1] - 1])
+      end
     elsif piece.colour == 'white' && valid_move_pawn?(current_position[0] + 1, current_position[1], 'white')
       piece.possible_moves.push([current_position[0] + 1, current_position[1]])
+      # white pawn capture
+      if @board[row+1][column+1].is_a?(ChessPiece) && @board[row+1][column+1].colour != piece.colour
+        piece.possible_moves.push([current_position[0] + 1, current_position[1] + 1])
+      elsif @board[row+1][column-1].is_a?(ChessPiece) && @board[row+1][column-1].colour != piece.colour
+        piece.possible_moves.push([current_position[0] + 1, current_position[1] - 1])
+      end
+    
     elsif row == 7 && piece.colour == 'black'
       piece.possible_moves.push([current_position[0] - 2, current_position[1]]) if valid_move_pawn?(current_position[0] - 2, current_position[1], 'black')
       piece.possible_moves.push([current_position[0] - 1, current_position[1]]) if valid_move_pawn?(current_position[0] - 1, current_position[1], 'black')
+       # black pawn capture
+       if @board[row-1][column+1].is_a?(ChessPiece) && @board[row-1][column+1].colour != piece.colour
+        piece.possible_moves.push([current_position[0] - 1, current_position[1] + 1])
+       elsif @board[row-1][column-1].is_a?(ChessPiece) && @board[row-1][column-1].colour != piece.colour
+        piece.possible_moves.push([current_position[0] - 1, current_position[1] - 1])
+       end
     elsif piece.colour == 'black' && valid_move_pawn?(current_position[0] - 1, current_position[1], 'black')
       piece.possible_moves.push([current_position[0] - 1, current_position[1]])
+       # black pawn capture
+       if @board[row-1][column+1].is_a?(ChessPiece) && @board[row-1][column+1].colour != piece.colour
+        piece.possible_moves.push([current_position[0] - 1, current_position[1] + 1])
+       elsif @board[row-1][column-1].is_a?(ChessPiece) && @board[row-1][column-1].colour != piece.colour
+        piece.possible_moves.push([current_position[0] - 1, current_position[1] - 1])
+       end
     end
 
   end

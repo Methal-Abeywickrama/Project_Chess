@@ -35,7 +35,6 @@ class Rook < ChessPiece
     super(colour)
     @count = { 'white' => 0, 'black' => 0 }
     @possible_moves = []
-    puts "count is #{@count}"
     @count[colour] += 1
     @@piece_count[colour] += 1
     @square = @@initial_squares[colour][@@piece_count[colour] - 1]

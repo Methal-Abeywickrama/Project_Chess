@@ -70,6 +70,7 @@ player2 = Player.new('Player 2', 'black')
 game = Board.new
 game.print_board
 game.cycle_through_pieces(:print_pieces)
+
 moves = []
 # puts game.board
 won = false
