@@ -25,8 +25,11 @@ Creates the game board and the player profiles
     # Case:06  the king comes into check
   end
 
+ >> Pawns have a problem containing common intial square
+ >> Duplication of possible moves after each turn when the piece does not move
+ >> Pawn captures
+
 >> find a suitable method to print a board when playing as black
->> check with chatgpt why removing the brackets in print board fucks the method
 >> change the unicode characters for black and white
 ##  >> write a way for each piece to know beforehand its possible moves
 done, with the exception of pawn bypasses

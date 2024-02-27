@@ -26,15 +26,19 @@ class Rook < ChessPiece
 
   attr_accessor :square, :colour, :chara, :possible_moves
 
+  
+  @@piece_count = { 'white' => 0, 'black' => 0 }
   @@initial_squares = { 'white' => [[1, 1], [8, 1]], 'black' => [[1, 8], [8, 8]] }
   @@transformations = [[0, 1], [1, 0], [-1, 0], [0, -1]]
   
   def initialize(colour)
     super(colour)
-    @count = {'white' => 0, 'black' => 0}
+    @count = { 'white' => 0, 'black' => 0 }
     @possible_moves = []
+    puts "count is #{@count}"
     @count[colour] += 1
-    @square = @@initial_squares[colour][@count[colour] - 1]
+    @@piece_count[colour] += 1
+    @square = @@initial_squares[colour][@@piece_count[colour] - 1]
     @chara = @colour.eql?("black") ? "\u{265C}" : "\u{2656}"
     # @possible_moves = calculate_moves_rook(@square[0], @square[1], colour)
   end
@@ -52,6 +56,7 @@ end
 class Knight < ChessPiece
   attr_accessor :chara, :colour, :square, :possible_moves
 
+  @@piece_count = { 'white' => 0, 'black' => 0 }
   @@initial_squares = { 'white' => [[2, 1], [7, 1]], 'black' => [[2, 8], [7, 8]] }
   
   def initialize(colour)
@@ -59,7 +64,8 @@ class Knight < ChessPiece
     @count = {'white' => 0, 'black' => 0}
     @possible_moves = []
     @count[colour] += 1
-    @square = @@initial_squares[colour][@count[colour] - 1]
+    @@piece_count[colour] += 1
+    @square = @@initial_squares[colour][@@piece_count[colour] - 1]
     @chara = @colour.eql?("black") ? "\u{265E}" : "\u{2658}"
   end
 end
@@ -68,6 +74,7 @@ end
 class Bishop < ChessPiece
   attr_accessor :chara, :colour, :square, :possible_moves
 
+  @@piece_count = { 'white' => 0, 'black' => 0 }
   @@initial_squares = { 'white' => [[3, 1], [6, 1]], 'black' => [[3, 8], [6, 8]] }
   
   def initialize(colour)
@@ -75,7 +82,8 @@ class Bishop < ChessPiece
     @count = {'white' => 0, 'black' => 0}
     @possible_moves = []
     @count[colour] += 1
-    @square = @@initial_squares[colour][@count[colour] - 1]
+    @@piece_count[colour] += 1
+    @square = @@initial_squares[colour][@@piece_count[colour] - 1]
     @chara = @colour.eql?("black") ? "\u{265D}" : "\u{2657}"
   end
 end
@@ -84,6 +92,7 @@ end
 class Queen < ChessPiece
   attr_accessor :chara, :colour, :square, :possible_moves
 
+  @@piece_count = { 'white' => 0, 'black' => 0 }
   @@initial_squares = { 'white' => [[4, 1]], 'black' => [[4, 8]] }
   
   def initialize(colour)
@@ -91,7 +100,8 @@ class Queen < ChessPiece
     @count = {'white' => 0, 'black' => 0}
     @possible_moves = []
     @count[colour] += 1
-    @square = @@initial_squares[colour][@count[colour] - 1]
+    @@piece_count[colour] += 1
+    @square = @@initial_squares[colour][@@piece_count[colour] - 1]
     @chara = @colour.eql?("black") ? "\u{265B}" : "\u{2655}"
   end
 end
@@ -107,7 +117,7 @@ class King < ChessPiece
     @count = {'white' => 0, 'black' => 0}
     @possible_moves = []
     @count[colour] += 1
-    @square = @@initial_squares[colour][@count[colour] - 1]
+    @square = @@initial_squares[colour][0]
     @chara = @colour.eql?("black") ? "\u{265A}" : "\u{2654}"
   end
 end
@@ -116,15 +126,17 @@ end
 class Pawn < ChessPiece
   attr_accessor :chara, :colour, :square, :possible_moves
 
+  @@piece_count = { 'white' => 0, 'black' => 0 }
   @@initial_squares = { 'white' => [[1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2], [8, 2]],
     'black' => [[1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7], [8, 7]] }
     
-    def initialize(colour)
-      super(colour)
-      @count = {'white' => 0, 'black' => 0}
+  def initialize(colour)
+    super(colour)
+    @count = {'white' => 0, 'black' => 0}
     @possible_moves = []
     @count[colour] += 1
-    @square = @@initial_squares[colour][@count[colour] - 1]
+    @@piece_count[colour] += 1
+    @square = @@initial_squares[colour][@@piece_count[colour] - 1]
     @chara = @colour.eql?("black") ? "\u{265F}" : "\u{2659}"
   end
 end

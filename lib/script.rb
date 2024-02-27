@@ -22,10 +22,6 @@ class Board
     set_the_board if @board.empty?
     cycle_through_pieces(:calculate_possible_moves)
 
-    # input = take_an_input
-
-    # print_board
-    # calculate_possible_moves
   end
 
   # methods to be executed at the end of each turn
@@ -33,9 +29,7 @@ class Board
     cycle_through_pieces(:calculate_possible_moves)
     opponent.check = cycle_through_pieces_for_checks(:check_for_checks, game.board)
     p opponent.check
-    if game.board[7][5].instance_of?(King)
-      puts 'gyrados'
-    end
+ 
     if opponent.check
      if checkmate?(moves.dup, player.colour)
       puts 'its a checkmate'
@@ -43,14 +37,16 @@ class Board
       puts 'no checkmate'
      end
     end
+    cycle_through_pieces(:print_pieces)
     print_board
   end
 
-  def print_pieces(row, column, piece)
-    p piece.class
-    p piece.colour
+  # Possibly redundant code
+  # def print_pieces(row, column, piece)
+  #   p piece.class
+  #   p piece.colour
 
-  end
+  # end
 end
 
 # Represents a human player
@@ -73,6 +69,7 @@ player2 = Player.new('Player 2', 'black')
 
 game = Board.new
 game.print_board
+game.cycle_through_pieces(:print_pieces)
 moves = []
 # puts game.board
 won = false

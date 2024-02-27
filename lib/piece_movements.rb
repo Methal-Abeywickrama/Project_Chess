@@ -3,17 +3,17 @@
 # Contain the functionalities for standard movements that will be used in other classes.
 module PieceMovements
 
-  def move(previous_square, new_square, randoom = false)
-    piece = @board[previous_square[0]][previous_square[1]]
-    if randoom
-      p piece
-    end
-    @board[new_square[0]][new_square[1]] = piece
-    @board[new_square[0]][new_square[1]].square = new_square
-    if randoom
-      p @board[new_square[0]][new_square[1]]
-    end
-    @board[previous_square[0]][previous_square[1]] = Blank.new
+  def move(previous_square, new_square)
+    piece = @board[previous_square[1]][previous_square[0]]
+    puts 'previous square is'
+    p previous_square
+    puts 'new square is'
+    p new_square
+
+    @board[new_square[1]][new_square[0]] = piece
+    @board[new_square[1]][new_square[0]].square = new_square
+ 
+    @board[previous_square[1]][previous_square[0]] = Blank.new
     [previous_square, new_square]
   end
 

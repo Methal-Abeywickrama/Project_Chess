@@ -45,16 +45,17 @@ module UserInput
       # ///////  check the validity
       st_sq = convert_input_to_standard(start_square)
       end_sq = convert_input_to_standard(final_square)
-      if @board[st_sq[0]][st_sq[1]].instance_of?(Blank) || @board[st_sq[0]][st_sq[1]].colour != color
+      if @board[st_sq[1]][st_sq[0]].instance_of?(Blank) || @board[st_sq[1]][st_sq[0]].colour != color
         valid_move_found = false
         puts 'wrong colour dumbass'
-      elsif @board[st_sq[0]][st_sq[1]].possible_moves.include?(end_sq)
+      elsif @board[st_sq[1]][st_sq[0]].possible_moves.include?(end_sq.reverse)
         valid_move_found = true
       elsif is_check?(moves, st_sq, end_sq)
         puts 'Illegal move '
 
         valid_move_found = false
       else
+
         valid_move_found = false
       end
     end
@@ -64,8 +65,8 @@ module UserInput
   def convert_input_to_standard(square)
     square_output = []
     reference = { 'a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5, 'f' => 6, 'g' => 7, 'h' => 8 }
-    square_output[1] = reference[square[0]]
-    square_output[0] = square[1].to_i
+    square_output[0] = reference[square[0]]
+    square_output[1] = square[1].to_i
     square_output
   end
 
