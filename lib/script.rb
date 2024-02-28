@@ -29,25 +29,21 @@ class Board
     cycle_through_pieces(:calculate_possible_moves)
     opponent.check = cycle_through_pieces_for_checks(:check_for_checks, game.board, opponent.colour)
     p opponent.check
- 
+    
+    # cycle_through_pieces(:print_pieces)
+    print_board
     if opponent.check
       puts 'its a check'
       if checkmate?(moves.dup, player.colour)
         puts 'its a checkmate'
+        return true 
       else  
         puts 'no checkmate'
       end
     end
-    # cycle_through_pieces(:print_pieces)
-    print_board
+    false
   end
 
-  # Possibly redundant code
-  # def print_pieces(row, column, piece)
-  #   p piece.class
-  #   p piece.colour
-
-  # end
 end
 
 # Represents a human player
@@ -78,40 +74,21 @@ won = false
 until won
   puts "#{player1.name}, enter your move"
   u_input = game.take_an_input('white', moves.dup)
-  p u_input
+  # p u_input
+  puts 'castlke' if game.is_castle?(u_input)
   moves += game.move(u_input[1], u_input[2])
-  game.turn_end(player1, player2, game, moves.dup)
-  # won = game.is_checkmate?
+  won = game.turn_end(player1, player2, game, moves.dup)
   next if won
   
   puts "#{player2.name}, enter your move"
   u_input = game.take_an_input('black', moves.dup)
-  p u_input
+  # p u_input
+  puts 'castlke' if game.is_castle?(u_input)
   moves += game.move(u_input[1], u_input[2])
-  game.turn_end(player2, player1, game, moves.dup)
-  # won = game.is_checkmate?
+  won = game.turn_end(player2, player1, game, moves.dup)
   puts 'round'
 end
 
-# just_checks = ['e2', 'e4', 'f7', 'f5', 'd1', 'h5']
-# checkmates = ['e2', 'e4', 'e7', 'e5', 'd1', 'h5', 'e8', 'e5', 'h5', 'e5']
-# until won
-#   puts "#{player1.name}, enter your move"
-#   u_input = game.take_an_input('white', just_checks.shift, just_checks.shift)
-#   game.move(u_input[1], u_input[2])
-#   game.turn_end(player1, player2)
-#   # won = game.is_checkmate?
-#   next if won
-  
-#   puts "#{player2.name}, enter your move"
-#   u_input = game.take_an_input('black', just_checks.shift, just_checks.shift)
-#   # u_input = game.take_an_input('black')
-#   p u_input
-#   game.move(u_input[1], u_input[2])
-#   game.turn_end(player2, player1)
-#   # won = game.is_checkmate?
-#   puts 'round'
-# end
 
 
 

@@ -5,6 +5,10 @@ module PieceMovements
 
   def move(previous_square, new_square)
     piece = @board[previous_square[1]][previous_square[0]]
+    if piece.is_a?(King) || piece.is_a?(Rook)
+      puts 'i moved'
+      piece.moved = true
+    end
 
     @board[new_square[1]][new_square[0]] = piece
     @board[new_square[1]][new_square[0]].square = new_square
@@ -140,6 +144,26 @@ module PieceMovements
         piece.possible_moves.push(next_position.reverse)
       end
     end
+    if piece.colour == 'white' && !(piece.moved) && @board[1][1].is_a?(Rook) && !(@board[1][1].moved)
+      if @board[1][2].instance_of?(Blank) && @board[1][3].instance_of?(Blank) && @board[1][4].instance_of?(Blank)
+        piece.possible_moves.push([3, 1])
+      end
+    end
+    if piece.colour == 'white' && !(piece.moved) && @board[1][8].is_a?(Rook) && !(@board[1][8].moved)
+      if @board[1][6].instance_of?(Blank) && @board[1][7].instance_of?(Blank) 
+        piece.possible_moves.push([7, 1])
+      end
+    end
+    if piece.colour == 'black' && !(piece.moved) && @board[8][1].is_a?(Rook) && !(@board[8][1].moved)
+      if @board[8][2].instance_of?(Blank) && @board[8][3].instance_of?(Blank) && @board[8][4].instance_of?(Blank)
+        piece.possible_moves.push([3, 8])
+      end
+    end
+    if piece.colour == 'black' && !(piece.moved) && @board[8][8].is_a?(Rook) && !(@board[8][8].moved)
+      if @board[8][6].instance_of?(Blank) && @board[8][7].instance_of?(Blank) 
+        piece.possible_moves.push([7, 8])
+      end
+    end
   end
 
   # Calculates the possible moves for the pawn
@@ -221,6 +245,24 @@ module PieceMovements
       false
     else 
       true
+    end
+  end
+
+  # Detect a request for castling
+  def is_castle?(input)
+    puts 'came here'
+    piece = @board[input[1][1]][input[1][0]]
+    patterns = [['black', [5, 8], [7, 8]], ['black', [5, 8], [3, 8]],
+                ['white', [5, 1], [7, 1]], ['white', [5, 1], [3, 1]]]
+    p piece
+    p input
+    puts piece.is_a?(King)
+    puts !piece.moved if piece.is_a?(King)
+    puts patterns.include?(input)
+    if piece.is_a?(King) && !piece.moved && patterns.include?(input)
+      true
+    else  
+      false 
     end
   end
 end

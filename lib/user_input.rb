@@ -53,6 +53,7 @@ module UserInput
 
         valid_move_found = false
       elsif @board[st_sq[1]][st_sq[0]].possible_moves.include?(end_sq)
+
         valid_move_found = true
       else
         valid_move_found = false

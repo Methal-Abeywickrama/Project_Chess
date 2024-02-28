@@ -24,7 +24,7 @@ end
 class Rook < ChessPiece
   include PieceMovements
 
-  attr_accessor :square, :colour, :chara, :possible_moves
+  attr_accessor :square, :colour, :chara, :possible_moves, :moved
 
   
   @@initial_squares = { 'white' => [[1, 1], [8, 1]], 'black' => [[1, 8], [8, 8]] }
@@ -35,6 +35,7 @@ class Rook < ChessPiece
     @possible_moves = []
     @square = @@initial_squares[colour][num - 1]
     @chara = @colour.eql?("black") ? "\u{265C}" : "\u{2656}"
+    @moved = false
   end
 
 end
@@ -83,7 +84,7 @@ end
 
 # This class represents the King
 class King < ChessPiece
-  attr_accessor :chara, :colour, :square, :possible_moves
+  attr_accessor :chara, :colour, :square, :possible_moves, :moved
 
   @@initial_squares = { 'white' => [[5, 1]], 'black' => [[5, 8]] }
   
@@ -92,6 +93,7 @@ class King < ChessPiece
     @possible_moves = []
     @square = @@initial_squares[colour][0]
     @chara = @colour.eql?("black") ? "\u{265A}" : "\u{2654}"
+    @moved = false
   end
 end
 
