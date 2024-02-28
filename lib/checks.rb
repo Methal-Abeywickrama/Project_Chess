@@ -8,10 +8,10 @@ module Checks
     new_board = Board.new
     move_list = moves.dup
     until move_list.empty?
-      new_board.move(move_list.shift, move_list.shift)
+      new_board.initiate_movement(move_list.shift, move_list.shift)
       new_board.cycle_through_pieces(:calculate_possible_moves)
     end
-    new_board.move(st_sq, end_sq)
+    new_board.initiate_movement(st_sq, end_sq)
     new_board.cycle_through_pieces(:calculate_possible_moves)
     # new_board.print_board
     # new_board.print_pieces
@@ -37,7 +37,7 @@ module Checks
     new_board = Board.new
     move_list = moves.dup
     until move_list.empty?
-      new_board.move(move_list.shift, move_list.shift)
+      new_board.initiate_movement(move_list.shift, move_list.shift)
       new_board.cycle_through_pieces(:calculate_possible_moves)
     end
     # new_board..cycle_through_pieces(:print_pieces)
@@ -51,10 +51,10 @@ module Checks
       newer_board = Board.new
       move_list = moves.dup
       until move_list.empty?
-        newer_board.move(move_list.shift, move_list.shift)
+        newer_board.initiate_movement(move_list.shift, move_list.shift)
         newer_board.cycle_through_pieces(:calculate_possible_moves)
       end
-      newer_board.move(piece.square, move)
+      newer_board.initiate_movement(piece.square, move)
       newer_board.cycle_through_pieces(:calculate_possible_moves)
       chek = newer_board.cycle_through_pieces_for_checks(:check_for_checks, newer_board.board, piece.colour)
       return false unless chek

@@ -29,9 +29,9 @@ class Board
     cycle_through_pieces(:calculate_possible_moves)
     opponent.check = cycle_through_pieces_for_checks(:check_for_checks, game.board, opponent.colour)
     p opponent.check
+    print_board
     
     # cycle_through_pieces(:print_pieces)
-    print_board
     if opponent.check
       puts 'its a check'
       if checkmate?(moves.dup, player.colour)
@@ -75,16 +75,16 @@ until won
   puts "#{player1.name}, enter your move"
   u_input = game.take_an_input('white', moves.dup)
   # p u_input
-  puts 'castlke' if game.is_castle?(u_input)
-  moves += game.move(u_input[1], u_input[2])
+  puts 'castlke' if game.is_castle?(u_input[1], u_input[2])
+  moves += game.initiate_movement(u_input[1], u_input[2])
   won = game.turn_end(player1, player2, game, moves.dup)
   next if won
   
   puts "#{player2.name}, enter your move"
   u_input = game.take_an_input('black', moves.dup)
   # p u_input
-  puts 'castlke' if game.is_castle?(u_input)
-  moves += game.move(u_input[1], u_input[2])
+  puts 'castlke' if game.is_castle?(u_input[1], u_input[2])
+  moves += game.initiate_movement(u_input[1], u_input[2])
   won = game.turn_end(player2, player1, game, moves.dup)
   puts 'round'
 end

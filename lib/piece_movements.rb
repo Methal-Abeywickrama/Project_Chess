@@ -3,6 +3,50 @@
 # Contain the functionalities for standard movements that will be used in other classes.
 module PieceMovements
 
+  # When a request to move a piece is given, checks the type of movement and executes the relevant one
+  def initiate_movement(previous_square, next_square)
+    # cycle_through_pieces(:print_pieces)
+    if is_castle?(previous_square, next_square)
+      castle(previous_square, next_square)
+    else  
+      move(previous_square, next_square)
+    end
+  end
+
+  # Executes a castle
+  def castle(previous_square, new_square)
+    piece = @board[previous_square[1]][previous_square[0]]
+
+    @board[new_square[1]][new_square[0]] = piece
+    @board[new_square[1]][new_square[0]].square = new_square
+    @board[previous_square[1]][previous_square[0]] = Blank.new
+    case [piece.colour, previous_square, new_square]
+    when ['white', [5, 1], [7, 1]]
+      piece = @board[1][8]
+      @board[1][6] = piece
+      @board[1][6].square = [6, 1]
+      @board[1][8] = Blank.new
+    when ['white', [5, 1], [3, 1]]
+      piece = @board[1][1]
+      @board[1][4] = piece
+      @board[1][4].square = [4, 1]
+      @board[1][1] = Blank.new
+    when ['black', [5, 8], [7, 8]]
+      piece = @board[8][8]
+      @board[8][6] = piece
+      @board[8][6].square = [6, 8]
+      @board[8][8] = Blank.new
+    when ['black', [5, 8], [3, 8]]
+      piece = @board[8][1]
+      @board[8][4] = piece
+      @board[8][4].square = [4, 8]
+      @board[8][1] = Blank.new
+    end
+    print_board
+    [previous_square, new_square]
+  end
+
+  # Makes a normal movement of a piece
   def move(previous_square, new_square)
     piece = @board[previous_square[1]][previous_square[0]]
     if piece.is_a?(King) || piece.is_a?(Rook)
@@ -249,17 +293,18 @@ module PieceMovements
   end
 
   # Detect a request for castling
-  def is_castle?(input)
+  def is_castle?(previous_square, next_square)
     puts 'came here'
-    piece = @board[input[1][1]][input[1][0]]
+    piece = @board[previous_square[1]][previous_square[0]]
+    pattern = [piece.colour, previous_square, next_square]
     patterns = [['black', [5, 8], [7, 8]], ['black', [5, 8], [3, 8]],
                 ['white', [5, 1], [7, 1]], ['white', [5, 1], [3, 1]]]
     p piece
-    p input
+    p pattern
     puts piece.is_a?(King)
     puts !piece.moved if piece.is_a?(King)
-    puts patterns.include?(input)
-    if piece.is_a?(King) && !piece.moved && patterns.include?(input)
+    puts patterns.include?(pattern)
+    if piece.is_a?(King) && !piece.moved && patterns.include?(pattern)
       true
     else  
       false 

@@ -35,7 +35,7 @@ module BoardSetup
     column[5] = King.new(colour)
     column[6] = Bishop.new(colour, 2)
     column[7] = Knight.new(colour, 2)
-    column[8] = Rook.new(colour, 3)
+    column[8] = Rook.new(colour, 2)
     column
   end
 
