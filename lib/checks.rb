@@ -57,8 +57,7 @@ module Checks
       newer_board.move(piece.square, move)
       newer_board.cycle_through_pieces(:calculate_possible_moves)
       chek = newer_board.cycle_through_pieces_for_checks(:check_for_checks, newer_board.board, piece.colour)
-      return false unless chek 
-
+      return false unless chek
     end
     true
   end
