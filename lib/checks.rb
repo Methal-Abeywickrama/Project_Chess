@@ -49,18 +49,15 @@ module Checks
   def check_checkmate(row, column, piece, moves)
     piece.possible_moves.each do |move|
       newer_board = Board.new
-      newer_board..cycle_through_pieces(:print_pieces)
-      newer_board.print_board
       move_list = moves.dup
       until move_list.empty?
         newer_board.move(move_list.shift, move_list.shift)
         newer_board.cycle_through_pieces(:calculate_possible_moves)
       end
-      puts "the piece is #{piece} the move is #{move}"
-      p piece
-      p move
       newer_board.move(piece.square, move)
       newer_board.cycle_through_pieces(:calculate_possible_moves)
+      chek = newer_board.cycle_through_pieces_for_checks(:check_for_checks, newer_board.board, piece.colour)
+      return false unless chek 
 
     end
     true
