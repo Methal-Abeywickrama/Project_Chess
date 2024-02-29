@@ -8,7 +8,11 @@ module PieceMovements
     # cycle_through_pieces(:print_pieces)
     if is_castle?(previous_square, next_square)
       castle(previous_square, next_square)
-    else  
+    elsif is_promotion?(previous_square, next_square)
+      move(previous_square, next_square)
+      promotion(next_square, @board[next_square[1]][next_square[0]].colour)
+      [previous_square, next_square]
+    else
       move(previous_square, next_square)
     end
   end
@@ -44,6 +48,30 @@ module PieceMovements
     end
     print_board
     [previous_square, new_square]
+  end
+
+  # Promotes the pawn
+  def promotion(square, colour)
+    puts 'Enter a piece to promote to :-'
+    new_piece = 'initial'
+    piece = @board[square[1]][square[0]]
+    until ['queen', 'bishop', 'rook', 'knight'].include?(new_piece)
+      new_piece = gets.chomp.downcase
+    end
+    case new_piece
+    when 'queen'
+      @board[square[1]][square[0]] = Queen.new(colour)
+      @board[square[1]][square[0]].square = square
+    when 'rook'
+      @board[square[1]][square[0]] = Rook.new(colour)
+      @board[square[1]][square[0]].square = square
+    when 'bishop'
+      @board[square[1]][square[0]] = Bishop.new(colour)
+      @board[square[1]][square[0]].square = square
+    when 'knight'
+      @board[square[1]][square[0]] = Knight.new(colour)
+      @board[square[1]][square[0]].square = square
+    end
   end
 
   # Makes a normal movement of a piece
@@ -294,20 +322,26 @@ module PieceMovements
 
   # Detect a request for castling
   def is_castle?(previous_square, next_square)
-    puts 'came here'
     piece = @board[previous_square[1]][previous_square[0]]
     pattern = [piece.colour, previous_square, next_square]
     patterns = [['black', [5, 8], [7, 8]], ['black', [5, 8], [3, 8]],
                 ['white', [5, 1], [7, 1]], ['white', [5, 1], [3, 1]]]
-    p piece
-    p pattern
-    puts piece.is_a?(King)
-    puts !piece.moved if piece.is_a?(King)
-    puts patterns.include?(pattern)
     if piece.is_a?(King) && !piece.moved && patterns.include?(pattern)
       true
     else  
       false 
+    end
+  end
+
+  # Detects a pawn promotion
+  def is_promotion?(previous_square, next_square)
+    piece = @board[previous_square[1]][previous_square[0]]
+    if piece.is_a?(Pawn) && piece.colour == 'white' && next_square[1] == 8
+      true
+    elsif piece.is_a?(Pawn) && piece.colour == 'black' && next_square[1] == 1
+      true
+    else
+      false
     end
   end
 end

@@ -9,6 +9,9 @@ To be defined:=
     --
 >> find a suitable method to print a board when playing as black
 >> change the unicode characters for black and white
+>> A method to read standard notation and an alternative input cycle to obtain input from the standard notation
+>> A suit of tests that can be given in standard notation
+>> Serialization
 ##  >> write a way for each piece to know beforehand its possible moves
 done, with the exception of pawn bypasses
 ## check architecture for pawns

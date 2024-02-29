@@ -30,7 +30,7 @@ class Rook < ChessPiece
   @@initial_squares = { 'white' => [[1, 1], [8, 1]], 'black' => [[1, 8], [8, 8]] }
   @@transformations = [[0, 1], [1, 0], [-1, 0], [0, -1]]
   
-  def initialize(colour, num)
+  def initialize(colour, num=1)
     super(colour)
     @possible_moves = []
     @square = @@initial_squares[colour][num - 1]
@@ -46,7 +46,7 @@ class Knight < ChessPiece
 
   @@initial_squares = { 'white' => [[2, 1], [7, 1]], 'black' => [[2, 8], [7, 8]] }
   
-  def initialize(colour, num)
+  def initialize(colour, num=1)
     super(colour)
     @possible_moves = []
     @square = @@initial_squares[colour][num - 1]
@@ -60,7 +60,7 @@ class Bishop < ChessPiece
 
   @@initial_squares = { 'white' => [[3, 1], [6, 1]], 'black' => [[3, 8], [6, 8]] }
   
-  def initialize(colour, num)
+  def initialize(colour, num=1)
     super(colour)
     @possible_moves = []
     @square = @@initial_squares[colour][num - 1]
@@ -104,7 +104,7 @@ class Pawn < ChessPiece
   @@initial_squares = { 'white' => [[1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2], [8, 2]],
     'black' => [[1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7], [8, 7]] }
     
-  def initialize(colour, num)
+  def initialize(colour, num=1)
     super(colour)
     @count = {'white' => 0, 'black' => 0}
     @possible_moves = []
